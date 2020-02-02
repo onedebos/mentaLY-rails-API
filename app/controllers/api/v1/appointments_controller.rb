@@ -1,11 +1,11 @@
-class AppointmentsController < ApplicationController
-  before_action :authenticate_user!
+class Api::V1::AppointmentsController < ApplicationController
+  # before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :set_provider
   
   def index
     @appointments = Appointment.all.order(created_at: :desc)
-    render json :@appointments
+    render json: @appointments
   end
 
   def new
@@ -40,6 +40,7 @@ class AppointmentsController < ApplicationController
 
   def set_user
     @user ||= User.find(params[current_user.id])
+    #compare with original ||
   end
 
   def set_appointment

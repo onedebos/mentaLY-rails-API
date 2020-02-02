@@ -1,10 +1,10 @@
-class Api::V1::ProviderController < ApplicationController
+class Api::V1::ProvidersController < ApplicationController
   before_action :set_provider, only: %i[show edit update destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     provider = Provider.all.order(created_at: :desc)
-    render json :provider
+    render json: provider
   end
 
   def create

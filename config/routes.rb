@@ -20,7 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  
   devise_for :users, :controllers => { registrations: 'registrations' }
-  get '/*path' => 'homepage#index'
+  # get '/*path' => 'homepage#index'
   root 'homepage#index'
 end
