@@ -1,5 +1,5 @@
 class Api::V1::ProvidersController < ApplicationController
-  before_action :set_provider, only: %i[show edit update destroy]
+  # before_action :set_provider, only: %i[show edit update destroy]
   # before_action :authenticate_user!
 
   def index
@@ -17,11 +17,18 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def show
-    @provider = Provider.find(params[:id])
-    if @provider
-      render json: @provider
+    # @provider = Provider.find(params[:id])
+    # if @provider
+    #   render json: @provider
+    # else
+    #   render json: @provider.errors
+    # end
+
+    
+    if provider
+      render json: provider
     else
-      render json: @provider.errors
+      render json: provider.errors
     end
   end
 
@@ -51,8 +58,12 @@ class Api::V1::ProvidersController < ApplicationController
     params.permit(:name, :email, :state, :description, :logo)
   end
 
-  def set_provider
+  def provider
     @provider ||= Provider.find(params[:id])
   end
+
+  # def set_provider
+  #   @provider ||= Provider.find(params[:id])
+  # end
 end
 

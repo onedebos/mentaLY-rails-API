@@ -40,6 +40,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -78,6 +79,7 @@ RSpec.configure do |config|
   # [...]
   # add `FactoryBot` methods
   config.include FactoryBot::Syntax::Methods
+
 
   # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
   config.before(:suite) do
