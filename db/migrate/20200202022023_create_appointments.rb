@@ -4,8 +4,8 @@ class CreateAppointments < ActiveRecord::Migration[6.0]
       t.string :city
       t.references :user, null: false, foreign_key: true
       t.references :provider, null: false, foreign_key: true
-      t.date :date
-      t.time :time
+      t.date :date, null: false
+      t.time :time, null: false
 
       t.timestamps
     end
