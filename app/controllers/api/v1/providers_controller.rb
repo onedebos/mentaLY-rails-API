@@ -48,7 +48,7 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def destroy
-    @provider.destroy
+    provider.destroy
     render json: {message: 'Provider deleted'}
   end
 

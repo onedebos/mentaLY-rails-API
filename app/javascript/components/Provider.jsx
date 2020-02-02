@@ -7,6 +7,7 @@ class Provider extends React.Component {
     this.state = {
       provider: { name: '', email: '', state: '', logo: '', description: '' },
     };
+    this.deleteProvider = this.deleteProvider.bind(this);
   }
   componentDidMount() {
     const {
@@ -26,6 +27,32 @@ class Provider extends React.Component {
       })
       .then(response => this.setState({ provider: response }))
       .catch(() => this.props.history.push('/provider'));
+  }
+
+  deleteProvider() {
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    const url = `/api/v1/providers/${id}`;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-Token': token,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then(() => this.props.history.push('/providers'))
+      .catch(error => console.log(error.message));
   }
 
   render() {
@@ -55,8 +82,12 @@ class Provider extends React.Component {
               </ul>
             </div>
             <div className="col-sm-12 col-lg-2">
-              <button type="button" className="btn btn-danger">
-                Delete Recipe
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={this.deleteProvider}
+              >
+                Delete Provider
               </button>
             </div>
           </div>
