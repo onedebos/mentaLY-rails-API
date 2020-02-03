@@ -91,8 +91,18 @@ class Provider extends React.Component {
               </button>
             </div>
           </div>
+
           <Link to="/providers" className="btn btn-link">
             Back to providers
+          </Link>
+          <Link
+            to={`/make_appointment/${provider.id}`}
+            className="btn btn-link"
+          >
+            Book appointment with this provider
+          </Link>
+          <Link to={`/edit/${provider.id}`} className="btn btn-link">
+            Edit details
           </Link>
         </div>
       </div>

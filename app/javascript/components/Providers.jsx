@@ -24,6 +24,7 @@ class Providers extends React.Component {
 
   render() {
     const { providers } = this.state;
+
     const allProviders = providers.map((provider, index) => (
       <div key={index} className="col-md-6 col-lg-4">
         <div className="card mb-4">
@@ -38,8 +39,9 @@ class Providers extends React.Component {
             <Link to={`/provider/${provider.id}`} className="btn custom-button">
               View Provider
             </Link>
+
             <Link
-              to={`/provider/${provider.id}/appointments`}
+              to={`/make_appointment/${provider.id}`}
               className="btn custom-button"
             >
               Book Appointments

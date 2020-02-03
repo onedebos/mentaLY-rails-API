@@ -16,15 +16,7 @@ class Api::V1::ProvidersController < ApplicationController
     end
   end
 
-  def show
-    # @provider = Provider.find(params[:id])
-    # if @provider
-    #   render json: @provider
-    # else
-    #   render json: @provider.errors
-    # end
-
-    
+  def show    
     if provider
       render json: provider
     else
@@ -33,11 +25,9 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def update
-    if @provider.update(provider_params)
-      render json: @provider
-    else
-      render json: @provider.errors
-    end
+    provider = Provider.find(params[:id])
+    provider.update!(provider_params)
+    render json: provider
   end
 
   def new
@@ -45,10 +35,11 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def edit
+    provider = Provider.find(params[:id])
   end
 
   def destroy
-    provider.destroy
+    provider&.destroy
     render json: {message: 'Provider deleted'}
   end
 
@@ -62,8 +53,5 @@ class Api::V1::ProvidersController < ApplicationController
     @provider ||= Provider.find(params[:id])
   end
 
-  # def set_provider
-  #   @provider ||= Provider.find(params[:id])
-  # end
 end
 
