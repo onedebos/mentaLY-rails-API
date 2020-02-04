@@ -1,8 +1,8 @@
 class Api::V1::SessionsController < ApplicationController
     include CurrentUserConcern
     def create
-        user = User.find_by_email(params[:email])
-        .try(:authenticate, params[:password])
+        user = User.find_by(email: params[:email]).
+        try(:authenticate, params[:password])
 
         if user
             session[:user_id] = user.id
@@ -12,14 +12,18 @@ class Api::V1::SessionsController < ApplicationController
                 user: user
             }
         else
-            redner json: {status:401}
+            render json: {status:401}
         end
+    end
+
+    def index
+        user = User.all
     end
 
     def logged_in
         if @current_user
             render json: {
-                logged_in: true
+                logged_in: true,
                 user: @current_user
             }
         else

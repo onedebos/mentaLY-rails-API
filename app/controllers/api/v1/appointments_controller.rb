@@ -2,6 +2,8 @@ class Api::V1::AppointmentsController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :set_provider
+
+  include CurrentUserConcern
   
   def index
     @appointments = Appointment.all.order(created_at: :desc)
@@ -24,7 +26,7 @@ class Api::V1::AppointmentsController < ApplicationController
   end
 
   def destroy
-    @appointment = @provider.appointments.find(paramsp[:id])
+    @appointment = @provider.appointments.find(params[:id])
     @appointment.destroy
     render json: {message: 'Appointment deleted'}
   end

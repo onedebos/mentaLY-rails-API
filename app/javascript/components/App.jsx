@@ -7,6 +7,7 @@ import NewProvider from '../components/provider/NewProvider';
 import NewAppointment from '../components/appointments/NewAppointment';
 import EditProvider from '../components/provider/EditProvider';
 import Registration from '../components/auth/Registration';
+import Login from '../components/auth/Login';
 
 export default class App extends Component {
   constructor(props) {
@@ -15,6 +16,15 @@ export default class App extends Component {
       loggedInStatus: 'NOT_LOGGED_IN',
       user: {},
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: 'LOGGED_in',
+      user: data.user,
+    });
   }
   render() {
     const { loggedInStatus } = this.state;
@@ -32,7 +42,11 @@ export default class App extends Component {
             exact
             path={'/sign_up'}
             render={props => (
-              <Registration {...props} loggedInStatus={loggedInStatus} />
+              <Registration
+                {...props}
+                handleLogin={this.handleLogin}
+                loggedInStatus={loggedInStatus}
+              />
             )}
           />
           <Route
@@ -66,6 +80,16 @@ export default class App extends Component {
             path={'/edit/:id'}
             render={props => (
               <EditProvider {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
+          <Route
+            path={'/login'}
+            render={props => (
+              <Login
+                {...props}
+                loggedInStatus={loggedInStatus}
+                handleLogin={this.handleLogin}
+              />
             )}
           />
         </Switch>

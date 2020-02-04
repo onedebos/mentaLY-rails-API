@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export class Registration extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
       email: '',
       password: '',
-      password_confirmation: '',
-      registrationErrors: '',
+      LoginErrors: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -25,16 +23,14 @@ export class Registration extends Component {
   }
 
   handleSubmit(e) {
-    const { name, email, password, password_confirmation } = this.state;
+    const { email, password } = this.state;
     e.preventDefault();
     axios
       .post(
-        'http://localhost:3000/api/v1/registrations',
+        'http://localhost:3000/api/v1/sessions',
         {
-          name: name,
           email: email,
           password: password,
-          password_confirmation: password_confirmation,
         },
         {
           withCredentials: true,
@@ -49,29 +45,14 @@ export class Registration extends Component {
         }
       })
       .catch(error => {
-        console.log('reg error', error);
+        console.log('login error', error);
       });
   }
   render() {
-    const {
-      name,
-      email,
-      password,
-      password_confirmation,
-      registrationErrors,
-    } = this.state;
+    const { email, password, registrationErrors } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter name"
-            value={name}
-            onChange={this.handleChange}
-            required
-          />
-
           <input
             name="email"
             placeholder="email"
@@ -90,19 +71,11 @@ export class Registration extends Component {
             type="password"
           />
 
-          <input
-            name="password_confirmation"
-            placeholder="re-enter your password"
-            value={password_confirmation}
-            onChange={this.handleChange}
-            required
-            type="password"
-          />
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     );
   }
 }
 
-export default Registration;
+export default Login;

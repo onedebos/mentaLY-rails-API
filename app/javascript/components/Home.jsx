@@ -10,6 +10,7 @@ export default class Home extends Component {
   }
 
   handleSuccessfulAuth(data) {
+    this.props.handleLogin(data);
     this.props.history.push('/providers');
   }
   render() {
@@ -31,7 +32,6 @@ export default class Home extends Component {
               View Providers
             </Link>
             {loggedInStatus}
-            <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
           </div>
         </div>
       </div>
