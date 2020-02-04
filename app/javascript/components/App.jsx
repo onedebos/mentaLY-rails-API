@@ -13,23 +13,61 @@ export default class App extends Component {
     super(props);
     this.state = {
       loggedInStatus: 'NOT_LOGGED_IN',
+      user: {},
     };
   }
   render() {
+    const { loggedInStatus } = this.state;
     return (
       <Router>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/sign_up" exact component={Registration} />
-          <Route path="/providers" exact component={Providers} />
-          <Route path="/provider/:id" exact component={Provider} />
-          <Route path="/provider/" exact component={NewProvider} />
           <Route
-            path="/make_appointment/:id"
             exact
-            component={NewAppointment}
+            path={'/'}
+            render={props => (
+              <Home {...props} loggedInStatus={loggedInStatus} />
+            )}
           />
-          <Route path="/edit/:id" exact component={EditProvider} />
+          <Route
+            exact
+            path={'/sign_up'}
+            render={props => (
+              <Registration {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
+          <Route
+            path={'/providers'}
+            render={props => (
+              <Providers {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
+          <Route
+            exact
+            path={'/provider/:id'}
+            render={props => (
+              <Provider {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
+          <Route
+            exact
+            path={'/provider/'}
+            render={props => (
+              <NewProvider {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
+          <Route
+            exact
+            path={'/make_appointment/:id'}
+            render={props => (
+              <NewAppointment {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
+          <Route
+            path={'/edit/:id'}
+            render={props => (
+              <EditProvider {...props} loggedInStatus={loggedInStatus} />
+            )}
+          />
         </Switch>
       </Router>
     );

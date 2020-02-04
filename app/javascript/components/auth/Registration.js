@@ -35,7 +35,14 @@ export class Registration extends Component {
         },
       )
       .then(response => {
-        console.log('response', response);
+        if (response.data.status === 'created') {
+          //pushes data into a hsa prop in Apps for other
+          //components to access
+          this.props.handleSuccessfulAuth(response.data);
+        }else{
+          this.setState({[registrationErrors]: ' There was an error 
+          creating your profile. Please try again'})
+        }
       })
       .catch(error => {
         console.log('reg error', error);

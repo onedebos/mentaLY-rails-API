@@ -24,6 +24,7 @@ class Providers extends React.Component {
 
   render() {
     const { providers } = this.state;
+    const { loggedInStatus } = this.props;
 
     const allProviders = providers.map((provider, index) => (
       <div key={index} className="col-md-6 col-lg-4">
@@ -46,6 +47,7 @@ class Providers extends React.Component {
             >
               Book Appointments
             </Link>
+            {loggedInStatus}
           </div>
         </div>
       </div>
