@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FlatPickr from 'flatpickr';
 
 class NewAppointment extends React.Component {
   constructor(props) {
@@ -7,8 +8,8 @@ class NewAppointment extends React.Component {
     this.state = {
       appointment: {
         city: '',
-        date: '',
-        time: '',
+        date: null,
+        time: null,
       },
       provider: { name: '' },
     };

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../components/Home';
-import Providers from '../components/Providers';
-import Provider from '../components/Provider';
-import NewProvider from '../components/NewProvider';
+import Providers from '../components/provider/Providers';
+import Provider from '../components/provider/Provider';
+import NewProvider from '../components/provider/NewProvider';
 import NewAppointment from '../components/appointments/NewAppointment';
-import EditProvider from '../components/EditProvider';
+import EditProvider from '../components/provider/EditProvider';
 
 export default (
   <Router>
