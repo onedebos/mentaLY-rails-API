@@ -49,7 +49,7 @@ export class Registration extends Component {
           <input
             type="text"
             name="name"
-            placeholder="email"
+            placeholder="Enter name"
             value={name}
             onChange={this.handleChange}
             required
