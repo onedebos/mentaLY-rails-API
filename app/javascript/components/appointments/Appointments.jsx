@@ -15,7 +15,7 @@ class Appointments extends React.Component {
   componentDidMount() {
     const {
       match: {
-        params: { id, userStatus },
+        params: { id },
       },
     } = this.props;
 

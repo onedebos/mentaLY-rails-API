@@ -39,24 +39,24 @@ export class Login extends Component {
       )
       .then(response => {
         if (response.data.status === 'created') {
-          //pushes data into a hsa prop in Apps for other
-          //components to access
-          // this.props.handleSuccessfulAuth(response.data);
-          // handleLogin(response.data)
-
           this.handleSuccessfulAuth(response.data);
         }
       })
       .catch(error => {
+        this.setState({
+          LoginErrors:
+            'The username or password you have entered is incorrect.',
+        });
         console.log('login error', error);
       });
   }
   render() {
     const { loggedInStatus } = this.props;
-    const { email, password, registrationErrors } = this.state;
+    const { email, password, LoginErrors } = this.state;
 
     return (
-      <div>
+      <div className="container pt-4 mt-4">
+        {LoginErrors}
         <form onSubmit={this.handleSubmit}>
           <input
             name="email"
@@ -75,8 +75,9 @@ export class Login extends Component {
             required
             type="password"
           />
-          {loggedInStatus}
-          <button type="submit">Login</button>
+          <button type="submit" className="btn btn-dark">
+            Login
+          </button>
         </form>
       </div>
     );

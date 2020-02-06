@@ -6,6 +6,7 @@ class UserAppointment extends React.Component {
     super(props);
     this.state = {
       appointments: [],
+      providers: [],
     };
   }
 
@@ -20,19 +21,39 @@ class UserAppointment extends React.Component {
       })
       .then(response => this.setState({ appointments: response }))
       .catch(() => this.props.history.push('/'));
+
+    fetch('/api/v1/providers')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then(response => this.setState({ providers: response }))
+      .catch(() => this.props.history.push('/'));
   }
 
   render() {
-    const { appointments } = this.state;
-    const { loggedInStatus, userStatus } = this.props;
+    const { appointments, providers } = this.state;
+    const { userStatus } = this.props;
     const filterWithUserId = appointments.filter(
       appointment => appointment.user_id === userStatus.id,
     );
     {
-      console.log('filter', filterWithUserId);
-      console.log('user', userStatus.admin);
+      // console.log('filter', filterWithUserId);
+      // console.log('user', userStatus.admin);
       console.log('Appointment', appointments);
+
+      console.log('providers', providers);
     }
+
+    const filterProvider = a_id =>
+      providers.filter(provider => {
+        if (provider.id === a_id) {
+          return provider.name;
+        }
+      });
+
     const showUserAppointments = filterWithUserId.map((appointment, index) => (
       <div key={index} className="col-md-6 col-lg-4">
         <div className="card mb-4">
@@ -40,6 +61,23 @@ class UserAppointment extends React.Component {
             <h5 className="card-title">{appointment.city}</h5>
             <p className="card-title">{appointment.date}</p>
             <p className="card-title">{appointment.time}</p>
+
+            <p className="card-title">
+              {filterProvider(appointment.provider_id)}
+            </p>
+          </div>
+        </div>
+      </div>
+    ));
+
+    const showAdminAppointments = appointments.map((appointment, index) => (
+      <div key={index} className="col-md-6 col-lg-4">
+        <div className="card mb-4">
+          <div className="card-body">
+            <h5 className="card-title">{appointment.city}</h5>
+            <p className="card-title">{appointment.date}</p>
+            <p className="card-title">{appointment.time}</p>
+            <p className="card-title">{appointment.provider_id}</p>
           </div>
         </div>
       </div>
@@ -71,7 +109,7 @@ class UserAppointment extends React.Component {
                   New Provider
                 </Link>
               ) : (
-                <div>Not admin </div>
+                ''
               )}
             </div>
             <div className="text-right mb-3">
@@ -80,7 +118,13 @@ class UserAppointment extends React.Component {
               </Link>
             </div>
             <div className="row">
-              {appointments.length > 0 ? showUserAppointments : noAppointments}
+              {filterWithUserId.length > 0 && userStatus.admin === false
+                ? showUserAppointments
+                : appointments.length > 0 && userStatus.admin === true
+                ? showAdminAppointments
+                : filterWithUserId.length < 1
+                ? noAppointments
+                : ''}
             </div>
             <Link to="/" className="btn btn-link">
               Home

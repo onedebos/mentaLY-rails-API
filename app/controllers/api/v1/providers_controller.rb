@@ -1,7 +1,8 @@
 class Api::V1::ProvidersController < ApplicationController
   # before_action :set_provider, only: %i[show edit update destroy]
   # before_action :authenticate_user!
-
+  include CurrentUserConcern
+  
   def index
     provider = Provider.all.order(created_at: :desc)
     render json: provider
@@ -43,6 +44,8 @@ class Api::V1::ProvidersController < ApplicationController
     render json: {message: 'Provider deleted'}
   end
 
+
+
   private
 
   def provider_params
@@ -52,6 +55,7 @@ class Api::V1::ProvidersController < ApplicationController
   def provider
     @provider ||= Provider.find(params[:id])
   end
+
 
 end
 

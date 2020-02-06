@@ -24,7 +24,7 @@ class Providers extends React.Component {
 
   render() {
     const { providers } = this.state;
-    const { loggedInStatus, userStatus } = this.props;
+    const { userStatus } = this.props;
 
     const allProviders = providers.map((provider, index) => (
       <div key={index} className="col-md-6 col-lg-4">
@@ -43,16 +43,15 @@ class Providers extends React.Component {
 
             <Link
               to={`/make_appointment/${provider.id}`}
-              className="btn custom-button"
+              className="btn custom-button ml-2"
             >
               Book Appointments
             </Link>
-            {loggedInStatus}
           </div>
         </div>
       </div>
     ));
-    const noRecipe = (
+    const noProvider = (
       <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
         <h4>
           No Providers yet. Why not <Link to="/new_provider">create one</Link>
@@ -81,7 +80,7 @@ class Providers extends React.Component {
                   New Provider
                 </Link>
               ) : (
-                <div>Not admin </div>
+                ''
               )}
             </div>
             <div className="text-right mb-3">
@@ -93,7 +92,7 @@ class Providers extends React.Component {
               </Link>
             </div>
             <div className="row">
-              {providers.length > 0 ? allProviders : noRecipe}
+              {providers.length > 0 ? allProviders : noProvider}
             </div>
             <Link to="/" className="btn btn-link">
               Home

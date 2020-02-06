@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import statesInNigeria from '../appointments/statesInNigeria';
 
 class NewProvider extends React.Component {
   constructor(props) {
@@ -54,6 +55,8 @@ class NewProvider extends React.Component {
       .catch(error => console.log(error.message));
   }
   render() {
+    const displayStatesInNigeria = () =>
+      statesInNigeria.map((state, k) => <option key={k}>{state}</option>);
     return (
       <div className="container mt-5">
         <div className="row">
@@ -86,14 +89,16 @@ class NewProvider extends React.Component {
               </div>
               <div className="form-group">
                 <label htmlFor="email">State:</label>
-                <input
-                  type="text"
+                <select
                   name="state"
                   id="state"
                   className="form-control"
                   required
                   onChange={this.onChange}
-                />
+                  placeholder="Lagos"
+                >
+                  {displayStatesInNigeria()}
+                </select>
               </div>
               <div className="form-group">
                 <label htmlFor="email">logo:</label>

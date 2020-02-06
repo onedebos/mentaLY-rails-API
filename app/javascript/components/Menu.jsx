@@ -15,7 +15,6 @@ export default class Menu extends Component {
       })
       .then(response => {
         this.props.handleLogout();
-        this.props.history.push('/');
       })
       .catch(error => {
         console.log('logout error', error);
@@ -33,7 +32,7 @@ export default class Menu extends Component {
           Your Appointments
         </Link>
         <Link
-          to=""
+          to="/"
           className="nav-item nav-link"
           onClick={() => this.handleLogOutClick()}
         >

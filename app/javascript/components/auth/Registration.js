@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export class Registration extends Component {
@@ -50,6 +51,7 @@ export class Registration extends Component {
       })
       .catch(error => {
         console.log('reg error', error);
+        this.setState({ registrationErrors: "You're already registered." });
       });
   }
   render() {
@@ -60,8 +62,22 @@ export class Registration extends Component {
       password_confirmation,
       registrationErrors,
     } = this.state;
-    return (
+
+    const dispslayErrorMessage = () => (
       <div>
+        <h4>
+          You're already registered. Were you trying to&nbsp;
+          <Link to="/login">Login</Link> instead?.
+        </h4>
+      </div>
+    );
+    return (
+      <div className="container pt-4 mt-4">
+        {registrationErrors.length > 0 ? (
+          <div>{dispslayErrorMessage()}</div>
+        ) : (
+          <div></div>
+        )}
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -98,7 +114,9 @@ export class Registration extends Component {
             required
             type="password"
           />
-          <button type="submit">Register</button>
+          <button type="submit" className="btn custom-button">
+            Register
+          </button>
         </form>
       </div>
     );

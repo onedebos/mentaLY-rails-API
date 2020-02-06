@@ -57,6 +57,7 @@ class Provider extends React.Component {
 
   render() {
     const { provider } = this.state;
+    const { userStatus } = this.props;
 
     return (
       <div className="">
@@ -82,13 +83,17 @@ class Provider extends React.Component {
               </ul>
             </div>
             <div className="col-sm-12 col-lg-2">
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={this.deleteProvider}
-              >
-                Delete Provider
-              </button>
+              {userStatus.admin === true ? (
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={this.deleteProvider}
+                >
+                  Delete Provider
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
 
@@ -101,9 +106,13 @@ class Provider extends React.Component {
           >
             Book appointment with this provider
           </Link>
-          <Link to={`/edit/${provider.id}`} className="btn btn-link">
-            Edit details
-          </Link>
+          {userStatus.admin == true ? (
+            <Link to={`/edit/${provider.id}`} className="btn btn-link">
+              Edit details
+            </Link>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );

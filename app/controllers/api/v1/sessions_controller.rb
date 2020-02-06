@@ -12,7 +12,9 @@ class Api::V1::SessionsController < ApplicationController
                 user: user
             }
         else
-            render json: {status:401}
+            render json: {
+                status:400
+            }, status: 400
         end
     end
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import statesInNigeria from './statesInNigeria';
 
 class NewAppointment extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class NewAppointment extends React.Component {
       time: null,
       user_id: null,
       provider: { name: '' },
+      errors: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -52,10 +54,7 @@ class NewAppointment extends React.Component {
     const url = `/api/v1/providers/${id}/appointments`;
     const { city, date, time, user_id } = this.state;
     const { userStatus } = this.props;
-    // console.log('user status id', userStatus.id);
-    // console.log(city, date, time);
     this.setState({ [user_id]: userStatus.id });
-    console.log('user+id', user_id);
     if (city.length == 0 || date.length == 0 || time.length == 0) return;
 
     // console.log('submit cicked');
@@ -78,40 +77,42 @@ class NewAppointment extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-          console.log(id);
           this.props.history.push(`/providers`);
           return response.json();
         }
         throw new Error('Network response was not ok.');
       })
-      .then(response => this.props.history.push(`/provider/${response.id}`))
+      .then(this.setState({ errors: 'Something went wrong. ' }))
       .catch(error => console.log(error.message));
   }
   render() {
-    const { provider } = this.state;
+    const { provider, errors } = this.state;
+    const displayStatesInNigeria = () =>
+      statesInNigeria.map((state, k) => <option key={k}>{state}</option>);
+    const displayErrors = () => <div>{errors}</div>;
     const { handleLogin } = this.props;
     return (
       <div className="container mt-5">
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
+            {errors.length > 0 ? displayErrors() : ''}
             <h1 className="font-weight-normal mb-5">
               Make an appointment with {provider.name}
             </h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="city">City:</label>
-                <input
-                  type="text"
+                <select
                   name="city"
                   id="city"
                   className="form-control"
                   required
                   onChange={this.onChange}
                   placeholder="Lagos"
-                />
+                >
+                  {displayStatesInNigeria()}
+                </select>
               </div>
-              {handleLogin}
-
               <div className="form-group">
                 <label htmlFor="Date">Date:</label>
                 <input

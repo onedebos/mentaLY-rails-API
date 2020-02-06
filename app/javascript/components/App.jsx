@@ -106,6 +106,7 @@ export default class App extends Component {
                 )}
               />
               <Route
+                exact
                 path={'/providers'}
                 render={props => (
                   <Providers
@@ -119,7 +120,11 @@ export default class App extends Component {
                 exact
                 path={'/provider/:id'}
                 render={props => (
-                  <Provider {...props} loggedInStatus={loggedInStatus} />
+                  <Provider
+                    {...props}
+                    loggedInStatus={loggedInStatus}
+                    userStatus={user}
+                  />
                 )}
               />
               <Route
