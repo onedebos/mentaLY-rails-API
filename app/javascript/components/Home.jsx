@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Registration from './auth/Registration';
+import axios from 'axios';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+    this.handleLogOutClick = this.handleLogOutClick.bind(this);
   }
 
   handleSuccessfulAuth(data) {
     this.props.handleLogin(data);
     this.props.history.push('/providers');
   }
+
+  handleLogOutClick() {
+    axios
+      .delete('/api/v1/logout', {
+        withCredentials: true,
+      })
+      .then(response => {
+        this.props.handleLogout();
+        this.props.history.push('/');
+      })
+      .catch(error => {
+        console.log('logout error', error);
+      });
+    this.props.handleLogout();
+  }
   render() {
     const { loggedInStatus } = this.props;
+    const isLoggedIn = () =>
+      loggedInStatus === 'NOT_LOGGED_IN' ? <h1>NOT IN</h1> : <h1>IN</h1>;
     return (
       <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
         <div className="jumbotron jumbotron-fluid bg-transparent">
@@ -31,7 +49,9 @@ export default class Home extends Component {
             >
               View Providers
             </Link>
-            {loggedInStatus}
+
+            {isLoggedIn()}
+            <button onClick={() => this.handleLogOutClick()}>Logout</button>
           </div>
         </div>
       </div>

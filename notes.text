@@ -9,6 +9,11 @@ to use axios instead of fetch
 
 references
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-project-with-a-react-frontend
-homepage    https://burnermail.io/
+homepage    
 
 metropolis font
+
+Add/
+1. persist login state
+2. Authenticate before displaying providers and appointments
+3. Write tests

@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FlatPickr from 'flatpickr';
 
 class NewAppointment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointment: {
-        city: '',
-        date: null,
-        time: null,
-      },
+      city: '',
+      date: null,
+      time: null,
+      user_id: null,
       provider: { name: '' },
     };
 
@@ -28,6 +26,7 @@ class NewAppointment extends React.Component {
         params: { id },
       },
     } = this.props;
+    this.setState({ user_id: 1 });
 
     const url = `/api/v1/providers/${id}`;
 
@@ -51,15 +50,21 @@ class NewAppointment extends React.Component {
 
     event.preventDefault();
     const url = `/api/v1/providers/${id}/appointments`;
-    const { city, date, time } = this.state;
-
+    const { city, date, time, user_id } = this.state;
+    const { userStatus } = this.props;
+    // console.log('user status id', userStatus.id);
+    // console.log(city, date, time);
+    this.setState({ [user_id]: userStatus.id });
+    // console.log('user+id', user_id);
     if (city.length == 0 || date.length == 0 || time.length == 0) return;
 
+    // console.log('submit cicked');
+
     const body = {
-      name,
       city,
       date,
       time,
+      user_id,
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -73,6 +78,8 @@ class NewAppointment extends React.Component {
     })
       .then(response => {
         if (response.ok) {
+          console.log(id);
+          this.props.history.push(`/providers`);
           return response.json();
         }
         throw new Error('Network response was not ok.');
@@ -81,7 +88,8 @@ class NewAppointment extends React.Component {
       .catch(error => console.log(error.message));
   }
   render() {
-    const { provider } = this.state;
+    const { provider, user } = this.state;
+    const { handleLogin, userStatus } = this.props;
     return (
       <div className="container mt-5">
         <div className="row">
@@ -91,10 +99,10 @@ class NewAppointment extends React.Component {
             </h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label htmlFor="city">City: </label>
+                <label htmlFor="city">City:</label>
                 <input
                   type="text"
-                  name="name"
+                  name="city"
                   id="city"
                   className="form-control"
                   required
@@ -102,6 +110,7 @@ class NewAppointment extends React.Component {
                   placeholder="Lagos"
                 />
               </div>
+              {handleLogin}
 
               <div className="form-group">
                 <label htmlFor="Date">Date:</label>

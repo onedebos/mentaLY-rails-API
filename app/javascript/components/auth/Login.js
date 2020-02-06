@@ -24,10 +24,11 @@ export class Login extends Component {
 
   handleSubmit(e) {
     const { email, password } = this.state;
+    const { handleLogin, history } = this.props;
     e.preventDefault();
     axios
       .post(
-        'http://localhost:3000/api/v1/sessions',
+        '/api/v1/sessions',
         {
           email: email,
           password: password,
@@ -41,6 +42,8 @@ export class Login extends Component {
           //pushes data into a hsa prop in Apps for other
           //components to access
           // this.props.handleSuccessfulAuth(response.data);
+          // handleLogin(response.data)
+
           this.handleSuccessfulAuth(response.data);
         }
       })
@@ -49,7 +52,9 @@ export class Login extends Component {
       });
   }
   render() {
+    const { loggedInStatus } = this.props;
     const { email, password, registrationErrors } = this.state;
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -70,7 +75,7 @@ export class Login extends Component {
             required
             type="password"
           />
-
+          {loggedInStatus}
           <button type="submit">Login</button>
         </form>
       </div>

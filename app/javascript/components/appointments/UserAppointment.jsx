@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Providers extends React.Component {
+class UserAppointment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      providers: [],
+      appointments: [],
     };
   }
 
   componentDidMount() {
-    const url = '/api/v1/providers/';
+    const url = '/api/v1/appointments';
     fetch(url)
       .then(response => {
         if (response.ok) {
@@ -18,44 +18,37 @@ class Providers extends React.Component {
         }
         throw new Error('Network response was not ok.');
       })
-      .then(response => this.setState({ providers: response }))
+      .then(response => this.setState({ appointments: response }))
       .catch(() => this.props.history.push('/'));
   }
 
   render() {
-    const { providers } = this.state;
+    const { appointments } = this.state;
     const { loggedInStatus, userStatus } = this.props;
-
-    const allProviders = providers.map((provider, index) => (
+    const filterWithUserId = appointments.filter(
+      appointment => appointment.user_id === userStatus.id,
+    );
+    {
+      console.log('filter', filterWithUserId);
+      console.log('user', userStatus.admin);
+      console.log('Appointment', appointments);
+    }
+    const showUserAppointments = filterWithUserId.map((appointment, index) => (
       <div key={index} className="col-md-6 col-lg-4">
         <div className="card mb-4">
-          <img
-            src={provider.logo}
-            className="card-img-top"
-            alt={`${provider.name} image`}
-          />
           <div className="card-body">
-            <h5 className="card-title">{provider.name}</h5>
-            <p className="card-title">{provider.email}</p>
-            <Link to={`/provider/${provider.id}`} className="btn custom-button">
-              View Provider
-            </Link>
-
-            <Link
-              to={`/make_appointment/${provider.id}`}
-              className="btn custom-button"
-            >
-              Book Appointments
-            </Link>
-            {loggedInStatus}
+            <h5 className="card-title">{appointment.city}</h5>
+            <p className="card-title">{appointment.date}</p>
+            <p className="card-title">{appointment.time}</p>
           </div>
         </div>
       </div>
     ));
-    const noRecipe = (
+    const noAppointments = (
       <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
         <h4>
-          No Providers yet. Why not <Link to="/new_provider">create one</Link>
+          No Appointments yet. Why not
+          <Link to="/providers"> create one</Link>
         </h4>
       </div>
     );
@@ -64,11 +57,9 @@ class Providers extends React.Component {
       <>
         <section className="jumbotron jumbotron-fluid text-center">
           <div className="container py-5">
-            <h1 className="display-4">Our mental health partners</h1>
+            <h1 className="display-4">Your appointments</h1>
             <p className="lead text-muted">
-              We’ve pulled together our most popular recipes, our latest
-              additions, and our editor’s picks, so there’s sure to be something
-              tempting for you to try.
+              All your appointments, in one place.
             </p>
           </div>
         </section>
@@ -84,15 +75,12 @@ class Providers extends React.Component {
               )}
             </div>
             <div className="text-right mb-3">
-              <Link
-                to={`/appointments/${userStatus.id}`}
-                className="btn custom-button"
-              >
-                See your Appointments
+              <Link to={`/providers`} className="btn custom-button">
+                Back to Providers
               </Link>
             </div>
             <div className="row">
-              {providers.length > 0 ? allProviders : noRecipe}
+              {appointments.length > 0 ? showUserAppointments : noAppointments}
             </div>
             <Link to="/" className="btn btn-link">
               Home
@@ -104,4 +92,4 @@ class Providers extends React.Component {
   }
 }
 
-export default Providers;
+export default UserAppointment;

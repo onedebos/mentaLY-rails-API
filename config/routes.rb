@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :providers do
         resources :appointments
       end
+      resources :appointments, only: [:index, :create, :destroy]
       resources :sessions, only: [:create, :destroy, :index]
       resources :registrations, only: [:create]
       delete :logout, to: 'sessions#logout'

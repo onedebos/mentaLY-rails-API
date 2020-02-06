@@ -1,7 +1,7 @@
 class Api::V1::AppointmentsController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
-  before_action :set_provider
+  # before_action :set_provider
 
   include CurrentUserConcern
   
@@ -17,9 +17,9 @@ class Api::V1::AppointmentsController < ApplicationController
 
   def create
     @appointment = @provider.appointments.create!(appointment_params)
-    @appointment.user_id = current_user.id
+    @appointment.user_id = @current_user.id
     if @appointment.save
-      render json: @appointments #change to appointment if eerror
+      render json: @appointments 
     else
       render json: @appointment.errors
     end
@@ -33,16 +33,16 @@ class Api::V1::AppointmentsController < ApplicationController
 
   private
   def appointment_params
-    params.require(:appointment).permit(:date, :time, :city)
+    params.require(:appointment).permit(:date, :time, :city, :user_id)
   end
 
   def set_provider
-    @provider ||= Provider.find(params[:provider_id])
+    @provider = Provider.find(params[:provider_id])
   end
 
   def set_user
-    @user ||= User.find(params[current_user.id])
-    #compare with original ||
+    @user = User.find(params[current_user.id])
+    # compare with original 
   end
 
   def set_appointment
