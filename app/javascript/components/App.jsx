@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+
 import ProtectedRoute from './protected.route';
 import Menu from './Menu';
 import Home from '../components/Home';
 import Providers from '../components/provider/Providers';
-import Provider from '../components/provider/Provider';
+import configureStore from '../configureStore';
+import ProviderComponent from './provider/ProviderComponent';
 import NewProvider from '../components/provider/NewProvider';
 import NewAppointment from '../components/appointments/NewAppointment';
 import EditProvider from '../components/provider/EditProvider';
@@ -13,6 +16,7 @@ import Registration from '../components/auth/Registration';
 import Login from '../components/auth/Login';
 import Appointments from '../components/appointments/Appointments';
 import UserAppointment from '../components/appointments/UserAppointment';
+const store = configureStore();
 
 export default class App extends Component {
   constructor(props) {
@@ -75,123 +79,119 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <Router>
-          <div>
-            <Menu
-              loggedInStatus={loggedInStatus}
-              userStatus={user}
-              handleLogout={this.handleLogout}
-            />
-            <Switch>
-              <Route
-                exact
-                path={'/'}
-                render={props => (
-                  <Home
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    handleLogout={this.handleLogout}
-                  />
-                )}
+        <Provider store={store}>
+          <Router>
+            <div>
+              <Menu
+                loggedInStatus={loggedInStatus}
+                userStatus={user}
+                handleLogout={this.handleLogout}
               />
-              <Route
-                exact
-                path={'/sign_up'}
-                render={props => (
-                  <Registration
-                    {...props}
-                    handleLogin={this.handleLogin}
-                    loggedInStatus={loggedInStatus}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path={'/providers'}
-                render={props => (
-                  <Providers
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    userStatus={user}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path={'/provider/:id'}
-                render={props => (
-                  <Provider
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    userStatus={user}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path={'/provider/'}
-                render={props => (
-                  <NewProvider {...props} loggedInStatus={loggedInStatus} />
-                )}
-              />
-              <Route
-                exact
-                path={'/make_appointment/:id'}
-                render={props => (
-                  <NewAppointment
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    userStatus={user}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path={'/appointments/:id'}
-                render={props => (
-                  <UserAppointment
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    userStatus={user}
-                  />
-                )}
-              />
-              <Route
-                path={'/edit/:id'}
-                render={props => (
-                  <EditProvider {...props} loggedInStatus={loggedInStatus} />
-                )}
-              />
-              <Route
-                path={'/login'}
-                render={props => (
-                  <Login
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    handleLogin={this.handleLogin}
-                  />
-                )}
-              />
-              <Route
-                path={'/user_appointments'}
-                render={props => (
-                  <Appointments
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    handleLogin={this.handleLogin}
-                    userStatus={user}
-                  />
-                )}
-              />
-              {/* <ProtectedRoute
-            exact
-            path={'/providers'}
-            component={Providers}
-            loggedInStatus={loggedInStatus}
-          /> */}
-            </Switch>
-          </div>
-        </Router>
+              <Switch>
+                <Route
+                  exact
+                  path={'/'}
+                  render={props => (
+                    <Home
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      handleLogout={this.handleLogout}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/sign_up'}
+                  render={props => (
+                    <Registration
+                      {...props}
+                      handleLogin={this.handleLogin}
+                      loggedInStatus={loggedInStatus}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/providers'}
+                  render={props => (
+                    <Providers
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/provider/:id'}
+                  render={props => (
+                    <ProviderComponent
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/provider/'}
+                  render={props => (
+                    <NewProvider {...props} loggedInStatus={loggedInStatus} />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/make_appointment/:id'}
+                  render={props => (
+                    <NewAppointment
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/appointments/:id'}
+                  render={props => (
+                    <UserAppointment
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  path={'/edit/:id'}
+                  render={props => (
+                    <EditProvider {...props} loggedInStatus={loggedInStatus} />
+                  )}
+                />
+                <Route
+                  path={'/login'}
+                  render={props => (
+                    <Login
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      handleLogin={this.handleLogin}
+                    />
+                  )}
+                />
+                <Route
+                  path={'/user_appointments'}
+                  render={props => (
+                    <Appointments
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      handleLogin={this.handleLogin}
+                      userStatus={user}
+                    />
+                  )}
+                />
+              </Switch>
+            </div>
+          </Router>
+        </Provider>
       </div>
     );
   }

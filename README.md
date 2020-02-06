@@ -1,24 +1,106 @@
-# README
+# Project Name
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> This is a fullstack app that allows people schedule
+> appointments with mental health service providers in Nigeria.
 
-Things you may want to cover:
+![screenshot](./app_screenshot.png)
 
-* Ruby version
+The app includes a Rails API that renders JSON to be consumed
+by React Views.
 
-* System dependencies
+## Built With
 
-* Configuration
+- Rails
+- React
+- Bootstrap
+- Node
+- Axios
+- Redux
 
-* Database creation
+## Live Demo
 
-* Database initialization
+[Live Demo Link](https://mentally.herokuapp.com)
 
-* How to run the test suite
+## Getting Started
 
-* Services (job queues, cache servers, search engines, etc.)
+**To get started, follow the instructions below**
 
-* Deployment instructions
+To get a local copy up and running follow these simple example steps.
 
-* ...
+### Prerequisites
+
+- Make sure to have Rails 6.0 and Ruby 2.5.1
+
+### Install
+
+Install the Ruby Gems required by rails
+
+```
+bundle install
+```
+
+Install the packages required by React
+
+```
+npm install or yarn install
+```
+
+### Usage
+
+To use the app, start the rails server using
+
+```
+rails s
+```
+
+In a seperate terminal window, start Webpack using
+
+```
+npm start
+```
+
+navigate to
+
+```
+http://localhost:3000
+```
+
+in your browser. You should see the app running!
+
+### Run tests
+
+Run modele tests
+
+```
+bundle exec rspec
+```
+
+### Deployment
+
+## Authors
+
+👤 **Adebola**
+
+👤 **Adebola**
+
+- Github: [@githubhandle](https://github.com/onedebos)
+- Twitter: [@twitterhandle](https://twitter.com/debosthefirst)
+- Linkedin: [linkedin](https://www.linkedin.com/in/adebola-niran/)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Thanks to [Murat Kohmaz](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) for his design.
+
+## 📝 License
+
+This project is [MIT](lic.url) licensed.

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class Providers extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Providers extends React.Component {
 
   render() {
     const { providers } = this.state;
-    const { userStatus } = this.props;
+    const { userStatus, loggedInStatus } = this.props;
 
     const allProviders = providers.map((provider, index) => (
       <div key={index} className="col-md-6 col-lg-4">
@@ -61,44 +62,50 @@ class Providers extends React.Component {
 
     return (
       <>
-        <section className="jumbotron jumbotron-fluid text-center">
-          <div className="container py-5">
-            <h1 className="display-4">Our mental health partners</h1>
-            <p className="lead text-muted">
-              Here are some of our favorite mental health providers we work
-              with. <br />
-              Click on any of them to book an appointment with them.
-              <br />
-            </p>
-          </div>
-        </section>
-        <div className="py-5">
-          <main className="container">
-            <div className="text-right mb-3">
-              {userStatus.admin === true ? (
-                <Link to="/provider" className="btn custom-button">
-                  New Provider
+        {loggedInStatus === 'LOGGED_in' ? (
+          <div>
+            <section className="jumbotron jumbotron-fluid text-center">
+              <div className="container py-5">
+                <h1 className="display-4">Our mental health partners</h1>
+                <p className="lead text-muted">
+                  Here are some of our favorite mental health providers we work
+                  with. <br />
+                  Click on any of them to book an appointment with them.
+                  <br />
+                </p>
+              </div>
+            </section>
+            <div className="py-5">
+              <main className="container">
+                <div className="text-right mb-3">
+                  {userStatus.admin === true ? (
+                    <Link to="/provider" className="btn custom-button">
+                      New Provider
+                    </Link>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div className="text-right mb-3">
+                  <Link
+                    to={`/appointments/${userStatus.id}`}
+                    className="btn custom-button"
+                  >
+                    See your Appointments
+                  </Link>
+                </div>
+                <div className="row">
+                  {providers.length > 0 ? allProviders : noProvider}
+                </div>
+                <Link to="/" className="btn btn-link">
+                  Home
                 </Link>
-              ) : (
-                ''
-              )}
+              </main>
             </div>
-            <div className="text-right mb-3">
-              <Link
-                to={`/appointments/${userStatus.id}`}
-                className="btn custom-button"
-              >
-                See your Appointments
-              </Link>
-            </div>
-            <div className="row">
-              {providers.length > 0 ? allProviders : noProvider}
-            </div>
-            <Link to="/" className="btn btn-link">
-              Home
-            </Link>
-          </main>
-        </div>
+          </div>
+        ) : (
+          <div>You're not logged in</div>
+        )}
       </>
     );
   }

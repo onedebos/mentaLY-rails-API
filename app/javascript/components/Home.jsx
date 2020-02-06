@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import axios from 'axios';
 
-export default class Home extends Component {
+const GET_USERS_REQUEST = 'GET_USER_REQUEST';
+const GET_USERS_SUCCESS = 'GET_USER_SUCCESS';
+
+const getUser = () => {
+  console.log('getUser() Action!');
+  return dispatch => {
+    dispatch({ type: GET_USERS_REQUEST });
+    return axios
+      .get('/api/v1/providers', { withCredentials: true })
+      .then(response => response.data)
+      .then(json => dispatch(getUsersSuccess(json)))
+      .catch(error => console.log(error));
+  };
+};
+
+export function getUsersSuccess(json) {
+  return {
+    type: GET_USERS_SUCCESS,
+    json,
+  };
+}
+
+class Home extends React.Component {
   constructor(props) {
     super(props);
 
@@ -37,6 +61,15 @@ export default class Home extends Component {
         <Link to="/providers">See our partners</Link>
       </div>
     );
+
+    const { users } = this.props;
+    const userInfo = users.map(user => (
+      <div key={user.name}>
+        {user.id}
+        {user.name}
+        {user.email}
+      </div>
+    ));
     return (
       <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
         <div className="jumbotron jumbotron-fluid bg-transparent">
@@ -48,9 +81,21 @@ export default class Home extends Component {
             <hr className="my-4" />
 
             {loggedInStatus === 'LOGGED_in' ? isLoggedIn() : isNotLoggedIn()}
+            <button className="getUserBtn" onClick={() => this.props.getUser()}>
+              getUser
+            </button>
+            <ul>{userInfo}</ul>
           </div>
         </div>
       </div>
     );
   }
 }
+
+const StructuredSelector = createStructuredSelector({
+  users: state => state.users,
+});
+
+const mapDispatchToProps = { getUser };
+
+export default connect(StructuredSelector, mapDispatchToProps)(Home);
