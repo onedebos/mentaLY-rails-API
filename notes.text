@@ -17,3 +17,10 @@ Add/
 1. persist login state
 2. Authenticate before displaying providers and appointments
 3. Write tests
+
+1. oonly admin can edit and delete providers
+2. user can delete appointments
+3. strf time
+4. redux
+5.style
+6.protected routes

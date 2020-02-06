@@ -5,7 +5,12 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from '../components/App';
+import Menu from '../components/Menu';
 
 document.addEventListener('DOMContentLoaded', () => {
-  render(<App />, document.body.appendChild(document.createElement('div')));
+  render(
+    <App />,
+
+    document.body.appendChild(document.createElement('div')),
+  );
 });

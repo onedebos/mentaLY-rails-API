@@ -90,8 +90,7 @@ Appointment.create(
 
 User.create(
     id:2,
-    first_name: 'a',
-    last_name: 'b',
+    name: 'a',
     email: 'a@b.com',
     password: 'password'
 )

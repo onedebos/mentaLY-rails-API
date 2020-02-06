@@ -7,7 +7,6 @@ export default class Home extends Component {
     super(props);
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
-    this.handleLogOutClick = this.handleLogOutClick.bind(this);
   }
 
   handleSuccessfulAuth(data) {
@@ -15,43 +14,40 @@ export default class Home extends Component {
     this.props.history.push('/providers');
   }
 
-  handleLogOutClick() {
-    axios
-      .delete('/api/v1/logout', {
-        withCredentials: true,
-      })
-      .then(response => {
-        this.props.handleLogout();
-        this.props.history.push('/');
-      })
-      .catch(error => {
-        console.log('logout error', error);
-      });
-    this.props.handleLogout();
-  }
   render() {
     const { loggedInStatus } = this.props;
-    const isLoggedIn = () =>
-      loggedInStatus === 'NOT_LOGGED_IN' ? <h1>NOT IN</h1> : <h1>IN</h1>;
+    const isNotLoggedIn = () => (
+      <div>
+        <Link to="/login" className="btn btn-lg custom-button" role="button">
+          Sign in
+        </Link>
+        <Link
+          to="/sign_up"
+          className="btn btn-lg ml-4 custom-button"
+          role="button"
+        >
+          Sign up
+        </Link>
+      </div>
+    );
+
+    const isLoggedIn = () => (
+      <div>
+        You're signed in.
+        <Link to="/providers">See our partners</Link>
+      </div>
+    );
     return (
       <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
         <div className="jumbotron jumbotron-fluid bg-transparent">
           <div className="container secondary-color">
-            <h1 className="display-4">Mentalee</h1>
+            <h1 className="display-4">MentaLLy</h1>
             <p className="lead">
               Book appointments with mental health providers across Nigeria.
             </p>
             <hr className="my-4" />
-            <Link
-              to="/providers"
-              className="btn btn-lg custom-button"
-              role="button"
-            >
-              View Providers
-            </Link>
 
-            {isLoggedIn()}
-            <button onClick={() => this.handleLogOutClick()}>Logout</button>
+            {loggedInStatus === 'LOGGED_in' ? isLoggedIn() : isNotLoggedIn()}
           </div>
         </div>
       </div>

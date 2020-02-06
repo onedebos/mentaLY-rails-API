@@ -19,7 +19,7 @@ class Api::V1::AppointmentsController < ApplicationController
     @appointment = @provider.appointments.create!(appointment_params)
     @appointment.user_id = @current_user.id
     if @appointment.save
-      render json: @appointments 
+      render json: @appointments
     else
       render json: @appointment.errors
     end

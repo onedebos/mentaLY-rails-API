@@ -66,9 +66,10 @@ class Providers extends React.Component {
           <div className="container py-5">
             <h1 className="display-4">Our mental health partners</h1>
             <p className="lead text-muted">
-              We’ve pulled together our most popular recipes, our latest
-              additions, and our editor’s picks, so there’s sure to be something
-              tempting for you to try.
+              Here are some of our favorite mental health providers we work
+              with. <br />
+              Click on any of them to book an appointment with them.
+              <br />
             </p>
           </div>
         </section>

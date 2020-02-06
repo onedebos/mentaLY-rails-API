@@ -55,7 +55,7 @@ class NewAppointment extends React.Component {
     // console.log('user status id', userStatus.id);
     // console.log(city, date, time);
     this.setState({ [user_id]: userStatus.id });
-    // console.log('user+id', user_id);
+    console.log('user+id', user_id);
     if (city.length == 0 || date.length == 0 || time.length == 0) return;
 
     // console.log('submit cicked');
@@ -88,8 +88,8 @@ class NewAppointment extends React.Component {
       .catch(error => console.log(error.message));
   }
   render() {
-    const { provider, user } = this.state;
-    const { handleLogin, userStatus } = this.props;
+    const { provider } = this.state;
+    const { handleLogin } = this.props;
     return (
       <div className="container mt-5">
         <div className="row">
