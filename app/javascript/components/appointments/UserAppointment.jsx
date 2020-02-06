@@ -39,20 +39,17 @@ class UserAppointment extends React.Component {
     const filterWithUserId = appointments.filter(
       appointment => appointment.user_id === userStatus.id,
     );
+
+    const filterProviders = a_id =>
+      providers.filter(provider => provider.id === a_id).map(p => p.name);
+
     {
       // console.log('filter', filterWithUserId);
       // console.log('user', userStatus.admin);
       console.log('Appointment', appointments);
 
-      console.log('providers', providers);
+      console.log('providers', filterProviders(10));
     }
-
-    const filterProvider = a_id =>
-      providers.filter(provider => {
-        if (provider.id === a_id) {
-          return provider.name;
-        }
-      });
 
     const showUserAppointments = filterWithUserId.map((appointment, index) => (
       <div key={index} className="col-md-6 col-lg-4">
@@ -63,7 +60,7 @@ class UserAppointment extends React.Component {
             <p className="card-title">{appointment.time}</p>
 
             <p className="card-title">
-              {filterProvider(appointment.provider_id)}
+              {filterProviders(appointment.provider_id)}
             </p>
           </div>
         </div>
@@ -74,10 +71,12 @@ class UserAppointment extends React.Component {
       <div key={index} className="col-md-6 col-lg-4">
         <div className="card mb-4">
           <div className="card-body">
-            <h5 className="card-title">{appointment.city}</h5>
-            <p className="card-title">{appointment.date}</p>
-            <p className="card-title">{appointment.time}</p>
-            <p className="card-title">{appointment.provider_id}</p>
+            <h5 className="card-title">City: {appointment.city}</h5>
+            <p className="card-title">Date: {appointment.date}</p>
+            <p className="card-title">Time: {appointment.time}</p>
+            <p className="card-title">
+              <strong>With:</strong> {filterProviders(appointment.provider_id)}
+            </p>
           </div>
         </div>
       </div>
