@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import axios from 'axios';
+import './styles/Home.css';
+import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GET_USERS_REQUEST = 'GET_USER_REQUEST';
 const GET_USERS_SUCCESS = 'GET_USER_SUCCESS';
@@ -40,27 +45,6 @@ class Home extends React.Component {
 
   render() {
     const { loggedInStatus } = this.props;
-    const isNotLoggedIn = () => (
-      <div>
-        <Link to="/login" className="btn btn-lg custom-button" role="button">
-          Sign in
-        </Link>
-        <Link
-          to="/sign_up"
-          className="btn btn-lg ml-4 custom-button"
-          role="button"
-        >
-          Sign up
-        </Link>
-      </div>
-    );
-
-    const isLoggedIn = () => (
-      <div>
-        You're signed in.
-        <Link to="/providers">See our partners</Link>
-      </div>
-    );
 
     const { users } = this.props;
     const userInfo = users.map(user => (
@@ -71,22 +55,32 @@ class Home extends React.Component {
       </div>
     ));
     return (
-      <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
-        <div className="jumbotron jumbotron-fluid bg-transparent">
-          <div className="container secondary-color">
-            <h1 className="display-4">MentaLLy</h1>
-            <p className="lead">
-              Book appointments with mental health providers across Nigeria.
-            </p>
-            <hr className="my-4" />
-
-            {loggedInStatus === 'LOGGED_in' ? isLoggedIn() : isNotLoggedIn()}
-            <button className="getUserBtn" onClick={() => this.props.getUser()}>
-              getUser
-            </button>
-            <ul>{userInfo}</ul>
+      <div className="home-body">
+        <header>
+          <div className="menu">
+            <FontAwesomeIcon className="menu-icon" icon={faBars} />
+            <FontAwesomeIcon className="menu-icon" icon={faSearch} />
           </div>
-        </div>
+
+          <h1>MentaLLy</h1>
+          <p>Book mental health services across Nigeria.</p>
+          {loggedInStatus === 'NOT_LOGGED_IN' ? (
+            <Link to="/sign_up">
+              <button className="sign-up">
+                Sign up to book
+                <FontAwesomeIcon
+                  className="sign-up-arrow"
+                  icon={faChevronCircleRight}
+                />
+              </button>
+            </Link>
+          ) : (
+            <p className="signed-in">
+              You're signed in. &nbsp;
+              <Link to="/providers">See our partners</Link>
+            </p>
+          )}
+        </header>
       </div>
     );
   }

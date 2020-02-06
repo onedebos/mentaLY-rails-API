@@ -81,23 +81,23 @@ export default class App extends Component {
       <div className="App">
         <Provider store={store}>
           <Router>
-            <div>
-              <Menu
-                loggedInStatus={loggedInStatus}
-                userStatus={user}
-                handleLogout={this.handleLogout}
+            <Switch>
+              <Route
+                exact
+                path={'/'}
+                render={props => (
+                  <Home
+                    {...props}
+                    loggedInStatus={loggedInStatus}
+                    handleLogout={this.handleLogout}
+                  />
+                )}
               />
-              <Switch>
-                <Route
-                  exact
-                  path={'/'}
-                  render={props => (
-                    <Home
-                      {...props}
-                      loggedInStatus={loggedInStatus}
-                      handleLogout={this.handleLogout}
-                    />
-                  )}
+              <div>
+                <Menu
+                  loggedInStatus={loggedInStatus}
+                  userStatus={user}
+                  handleLogout={this.handleLogout}
                 />
                 <Route
                   exact
@@ -188,8 +188,8 @@ export default class App extends Component {
                     />
                   )}
                 />
-              </Switch>
-            </div>
+              </div>
+            </Switch>
           </Router>
         </Provider>
       </div>

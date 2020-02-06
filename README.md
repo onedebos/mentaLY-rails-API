@@ -16,6 +16,8 @@ by React Views.
 - Node
 - Axios
 - Redux
+- FontAwesomeIcons
+- Circular std font
 
 ## Live Demo
 

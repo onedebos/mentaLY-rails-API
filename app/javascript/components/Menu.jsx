@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './styles/Menu.css';
 
 export default class Menu extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ export default class Menu extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link to="/" className="navbar-brand">
             MentaLLy
           </Link>
@@ -79,6 +80,30 @@ export default class Menu extends Component {
               {loggedInStatus === 'LOGGED_in' ? navigation(userStatus) : auth()}
               {console.log(loggedInStatus)}
             </div>
+          </div>
+        </nav> */}
+
+        <nav class="menu-bar">
+          <h3 class="menu-logo">MentaLLy</h3>
+          <img
+            class="user-avatar"
+            src="https://api.adorable.io/avatars/100/abott@adorable.png"
+          />
+          <p class="user-name">@User Name</p>
+
+          <div class="menu-items">
+            <a class="menu-item" href="#">
+              Home
+            </a>
+            <a class="menu-item" href="#">
+              Partners
+            </a>
+            <a class="menu-item" href="#">
+              Appointments
+            </a>
+            <a class="menu-item" href="#">
+              Logout
+            </a>
           </div>
         </nav>
       </div>
