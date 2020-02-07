@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DisplayAllTitles from '../auth/DisplayAllTtitles';
+import AppointmentCard from './AppointmentCard';
+import '../styles/UserAppointments.css';
 
 class UserAppointment extends React.Component {
   constructor(props) {
@@ -44,38 +47,28 @@ class UserAppointment extends React.Component {
       providers.filter(provider => provider.id === a_id).map(p => p.name);
 
     const showUserAppointments = filterWithUserId.map((appointment, index) => (
-      <div key={index} className="col-md-6 col-lg-4">
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5 className="card-title">{appointment.city}</h5>
-            <p className="card-title">{appointment.date}</p>
-            <p className="card-title">{appointment.time}</p>
-
-            <p className="card-title">
-              {filterProviders(appointment.provider_id)}
-            </p>
-          </div>
-        </div>
-      </div>
+      <AppointmentCard
+        key={index}
+        pName={filterProviders(appointment.provider_id)}
+        appTime={appointment.time}
+        appLocation={appointment.city}
+        appDate={appointment.date}
+      />
     ));
 
     const showAdminAppointments = appointments.map((appointment, index) => (
-      <div key={index} className="col-md-6 col-lg-4">
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5 className="card-title">City: {appointment.city}</h5>
-            <p className="card-title">Date: {appointment.date}</p>
-            <p className="card-title">Time: {appointment.time}</p>
-            <p className="card-title">
-              <strong>With:</strong> {filterProviders(appointment.provider_id)}
-            </p>
-          </div>
-        </div>
-      </div>
+      <AppointmentCard
+        key={appointment.id}
+        pName={filterProviders(appointment.provider_id)}
+        appTime={appointment.time}
+        appLocation={appointment.city}
+        appDate={appointment.date}
+      />
     ));
+
     const noAppointments = (
-      <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
-        <h4>
+      <div className="">
+        <h4 className="no-appointments">
           No Appointments yet. Why not
           <Link to="/providers"> create one</Link>
         </h4>
@@ -84,43 +77,20 @@ class UserAppointment extends React.Component {
 
     return (
       <>
-        <section className="jumbotron jumbotron-fluid text-center">
-          <div className="container py-5">
-            <h1 className="display-4">Your appointments</h1>
-            <p className="lead text-muted">
-              All your appointments, in one place.
-            </p>
+        <div>
+          <DisplayAllTitles
+            main="YOUR APPOINTMENTS"
+            sub="All your appointments in one place."
+          />
+          <div className="grid-for-appointments-list">
+            {filterWithUserId.length > 0 && userStatus.admin === false
+              ? showUserAppointments
+              : appointments.length > 0 && userStatus.admin === true
+              ? showAdminAppointments
+              : filterWithUserId.length < 1
+              ? noAppointments
+              : ''}
           </div>
-        </section>
-        <div className="py-5">
-          <main className="container">
-            <div className="text-right mb-3">
-              {userStatus.admin === true ? (
-                <Link to="/provider" className="btn custom-button">
-                  New Provider
-                </Link>
-              ) : (
-                ''
-              )}
-            </div>
-            <div className="text-right mb-3">
-              <Link to={`/providers`} className="btn custom-button">
-                Back to Providers
-              </Link>
-            </div>
-            <div className="row">
-              {filterWithUserId.length > 0 && userStatus.admin === false
-                ? showUserAppointments
-                : appointments.length > 0 && userStatus.admin === true
-                ? showAdminAppointments
-                : filterWithUserId.length < 1
-                ? noAppointments
-                : ''}
-            </div>
-            <Link to="/" className="btn btn-link">
-              Home
-            </Link>
-          </main>
         </div>
       </>
     );

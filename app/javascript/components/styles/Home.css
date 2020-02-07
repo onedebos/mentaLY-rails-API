@@ -42,6 +42,7 @@ header p {
   cursor: pointer;
   border: 1px solid #9bbd0f;
   border-radius: 10px;
+  font-family: CircularStd;
 
   transition: 0.3s;
 }
@@ -71,6 +72,7 @@ header p {
 
 .signed-in a {
   color: #7e5608;
+  text-decoration: none;
 }
 
 .sign-in {
@@ -86,6 +88,7 @@ header p {
   margin: 3em 1.8em;
 }
 
-a {
+a,
+a:hover {
   text-decoration: none;
 }

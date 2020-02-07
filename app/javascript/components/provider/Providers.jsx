@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Providers.css';
 import ProvidersComponent from './ProvidersComponent';
+import DisplayAllTitles from '../auth/DisplayAllTtitles';
 
 class Providers extends React.Component {
   constructor(props) {
@@ -51,12 +52,11 @@ class Providers extends React.Component {
     return (
       <>
         {loggedInStatus === 'LOGGED_in' ? (
-          <div className="providers-page-title">
-            <h1 className="providers-heading">OUR PARTNERS</h1>
-            <p className="providers-subheading">
-              Select a provider to book an appointment
-            </p>
-            <hr className="rule" />
+          <div>
+            <DisplayAllTitles
+              main="OUR PARTNERS"
+              sub="Select a provider to book an appointment."
+            />
             <div className="grid-for-providers-list">
               {providers.length > 0 ? allProviders : noProvider}
             </div>
