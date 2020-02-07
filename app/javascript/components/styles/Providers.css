@@ -1,3 +1,30 @@
-body {
-  /* background-color: red; */
+@import 'reset';
+
+.providers-page-title {
+  margin-top: 4em;
+}
+
+.providers-heading,
+.providers-subheading {
+  text-align: center;
+  font-family: CircularStd;
+}
+
+.providers-heading {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.providers-subheading {
+  margin: 1em 0;
+}
+
+hr {
+  color: #efefef;
+  width: 100px;
+}
+
+.grid-for-providers-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

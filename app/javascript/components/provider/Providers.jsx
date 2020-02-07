@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Providers.css';
+import ProvidersComponent from './ProvidersComponent';
 
 class Providers extends React.Component {
   constructor(props) {
@@ -29,28 +30,14 @@ class Providers extends React.Component {
     const { userStatus, loggedInStatus } = this.props;
 
     const allProviders = providers.map((provider, index) => (
-      <div key={index} className="col-md-6 col-lg-4">
-        <div className="card mb-4">
-          <img
-            src={provider.logo}
-            className="card-img-top"
-            alt={`${provider.name} image`}
-          />
-          <div className="card-body">
-            <h5 className="card-title">{provider.name}</h5>
-            <p className="card-title">{provider.email}</p>
-            <Link to={`/provider/${provider.id}`} className="btn custom-button">
-              View Provider
-            </Link>
-
-            <Link
-              to={`/make_appointment/${provider.id}`}
-              className="btn custom-button ml-2"
-            >
-              Book Appointments
-            </Link>
-          </div>
-        </div>
+      <div key={index}>
+        <ProvidersComponent
+          imageURL={provider.logo}
+          name={provider.name}
+          alt={`${provider.name} image`}
+          providerURL={`/provider/${provider.id}`}
+          appointmentURL={`/make_appointment/${provider.id}`}
+        />
       </div>
     ));
     const noProvider = (
@@ -64,44 +51,14 @@ class Providers extends React.Component {
     return (
       <>
         {loggedInStatus === 'LOGGED_in' ? (
-          <div>
-            <section className="jumbotron jumbotron-fluid text-center">
-              <div className="container py-5">
-                <h1 className="display-4">Our mental health partners</h1>
-                <p className="lead text-muted">
-                  Here are some of our favorite mental health providers we work
-                  with. <br />
-                  Click on any of them to book an appointment with them.
-                  <br />
-                </p>
-              </div>
-            </section>
-            <div className="py-5">
-              <main className="container">
-                <div className="text-right mb-3">
-                  {userStatus.admin === true ? (
-                    <Link to="/provider" className="btn custom-button">
-                      New Provider
-                    </Link>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className="text-right mb-3">
-                  <Link
-                    to={`/appointments/${userStatus.id}`}
-                    className="btn custom-button"
-                  >
-                    See your Appointments
-                  </Link>
-                </div>
-                <div className="row">
-                  {providers.length > 0 ? allProviders : noProvider}
-                </div>
-                <Link to="/" className="btn btn-link">
-                  Home
-                </Link>
-              </main>
+          <div className="providers-page-title">
+            <h1 className="providers-heading">OUR PARTNERS</h1>
+            <p className="providers-subheading">
+              Select a provider to book an appointment
+            </p>
+            <hr className="rule" />
+            <div className="grid-for-providers-list">
+              {providers.length > 0 ? allProviders : noProvider}
             </div>
           </div>
         ) : (

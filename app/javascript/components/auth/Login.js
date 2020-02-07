@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import '../styles/Login.css';
+import Field from './Field';
+import Submit from './Submit';
 
 export class Login extends Component {
   constructor(props) {
@@ -55,30 +59,51 @@ export class Login extends Component {
     const { email, password, LoginErrors } = this.state;
 
     return (
-      <div className="container pt-4 mt-4">
-        {LoginErrors}
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={this.handleChange}
-            required
-            type="email"
-          />
-
-          <input
-            name="password"
-            placeholder="Enter a password"
-            value={password}
-            onChange={this.handleChange}
-            required
-            type="password"
-          />
-          <button type="submit" className="btn btn-dark">
-            Login
-          </button>
-        </form>
+      <div className="login-bg">
+        <div className="login-wrapper">
+          <p className="login-errors">{LoginErrors}</p>
+          <h3 className="login-title">Log in</h3>
+          <form className="login-form" onSubmit={this.handleSubmit}>
+            <Field
+              value={email}
+              type="email"
+              onChange={this.handleChange}
+              label="E-mail"
+              name="email"
+              id="email"
+            />
+            <Field
+              value={password}
+              type="password"
+              onChange={this.handleChange}
+              label="Password"
+              name="password"
+              id="password"
+            />
+            <div className="remember-me">
+              <input type="checkbox" />
+              <label>Remember me</label>
+            </div>
+            {/* <div className="login-btn">
+              <button type="submit">Log in</button>
+            </div>
+            <hr className="hr-3" />
+            <div className="back-sign-up">
+              <Link to="/sign_up">Sign up</Link>
+            </div>
+            <div className="forgot">
+              <Link to="/">Forgot your password?</Link>
+            </div> */}
+            <Submit
+              buttonType="submit"
+              buttonText="Sign in"
+              linkOne="/sign_up"
+              linkOneText="Sign up"
+              linkTwo="/"
+              linkTwoText="Forgot your password?"
+            />
+          </form>
+        </div>
       </div>
     );
   }

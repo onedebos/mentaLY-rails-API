@@ -62,18 +62,30 @@ class Home extends React.Component {
             <FontAwesomeIcon className="menu-icon" icon={faSearch} />
           </div>
 
-          <h1>MentaLLy</h1>
+          <h1 className="logo-title">MentaLLy</h1>
           <p>Book mental health services across Nigeria.</p>
           {loggedInStatus === 'NOT_LOGGED_IN' ? (
-            <Link to="/sign_up">
-              <button className="sign-up">
-                Sign up to book
-                <FontAwesomeIcon
-                  className="sign-up-arrow"
-                  icon={faChevronCircleRight}
-                />
-              </button>
-            </Link>
+            <div>
+              <Link to="/sign_up">
+                <button className="sign-up">
+                  Sign up to book
+                  <FontAwesomeIcon
+                    className="sign-up-arrow"
+                    icon={faChevronCircleRight}
+                  />
+                </button>
+              </Link>
+              <div>
+                <p className="have-account">have an account?</p>
+                <Link to="/login" className="sign-in">
+                  Sign in
+                  <FontAwesomeIcon
+                    className="sign-up-arrow"
+                    icon={faChevronCircleRight}
+                  />
+                </Link>
+              </div>
+            </div>
           ) : (
             <p className="signed-in">
               You're signed in. &nbsp;

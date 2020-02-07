@@ -2,7 +2,7 @@
 
 .user-avatar {
   border-radius: 23%;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .menu-items {
@@ -12,17 +12,21 @@
 }
 
 .menu-bar {
-  margin-left: 2em;
-  max-width: 200px;
-  padding-top: 0;
+  padding-left: 3em;
+  max-width: 20vw;
   height: 100vh;
   font-family: circularStd;
   border-right: 2px solid #efefef;
+  position: sticky;
+  top: 0;
 }
 
 .menu-logo {
   margin: 2em 0;
   letter-spacing: 0.3em;
+  font-weight: 700;
+  color: #906717;
+  font-size: 1.2em;
 }
 
 .menu-item {
@@ -30,7 +34,7 @@
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 800;
-  padding: 20px;
+  padding: 20px 0px;
 }
 
 .menu-item:focus {

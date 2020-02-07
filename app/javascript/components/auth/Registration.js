@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Field from './Field';
+import Submit from '../auth/Submit';
+import '../styles/Registration.css';
 
 export class Registration extends Component {
   constructor(props) {
@@ -72,52 +75,53 @@ export class Registration extends Component {
       </div>
     );
     return (
-      <div className="container pt-4 mt-4">
-        {registrationErrors.length > 0 ? (
-          <div>{dispslayErrorMessage()}</div>
-        ) : (
-          <div></div>
-        )}
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter name"
-            value={name}
-            onChange={this.handleChange}
-            required
-          />
-
-          <input
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={this.handleChange}
-            required
-            type="email"
-          />
-
-          <input
-            name="password"
-            placeholder="Enter a password"
-            value={password}
-            onChange={this.handleChange}
-            required
-            type="password"
-          />
-
-          <input
-            name="password_confirmation"
-            placeholder="re-enter your password"
-            value={password_confirmation}
-            onChange={this.handleChange}
-            required
-            type="password"
-          />
-          <button type="submit" className="btn custom-button">
-            Register
-          </button>
-        </form>
+      <div className="login-bg">
+        <div className="sign-up-wrapper">
+          <p className="login-errors">
+            {registrationErrors.length > 0 ? registrationErrors : ''}
+          </p>
+          <h3 className="login-title">Sign up</h3>
+          <form className="login-form" onSubmit={this.handleSubmit}>
+            <Field
+              label="Name"
+              value={name}
+              onChange={this.handleChange}
+              type="name"
+            />
+            <Field
+              label="E-mail"
+              value={email}
+              onChange={this.handleChange}
+              type="email"
+              name="email"
+              id="email"
+            />
+            <Field
+              label="Password"
+              value={password}
+              onChange={this.handleChange}
+              type="password"
+              name="password"
+              id="password"
+            />
+            <Field
+              label="Re-enter password"
+              value={password_confirmation}
+              onChange={this.handleChange}
+              type="password"
+              name="password_confirmation"
+              id="password_confirmation"
+            />
+            <Submit
+              buttonType="submit"
+              buttonText="Sign up"
+              linkOne="/login"
+              linkOneText="Already signed up?"
+              linkTwo="/"
+              linkTwoText="Home"
+            />
+          </form>
+        </div>
       </div>
     );
   }
