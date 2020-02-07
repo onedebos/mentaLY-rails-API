@@ -8,6 +8,14 @@
   justify-content: center;
 }
 
+.login-logo {
+  margin: 0.2em 0;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+  color: #906717;
+  font-size: 1em;
+}
+
 .login-wrapper {
   background-color: white;
   position: absolute;
@@ -36,7 +44,7 @@
 }
 
 .remember-me {
-  margin-top: 1em;
+  margin-top: 0.5em;
   font-size: 1.1em;
 }
 

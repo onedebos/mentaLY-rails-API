@@ -77,6 +77,7 @@ export class Registration extends Component {
     return (
       <div className="login-bg">
         <div className="sign-up-wrapper">
+          <h3 className="login-logo">MentaLLy</h3>
           <p className="login-errors">
             {registrationErrors.length > 0 ? registrationErrors : ''}
           </p>

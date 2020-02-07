@@ -43,14 +43,6 @@ class UserAppointment extends React.Component {
     const filterProviders = a_id =>
       providers.filter(provider => provider.id === a_id).map(p => p.name);
 
-    {
-      // console.log('filter', filterWithUserId);
-      // console.log('user', userStatus.admin);
-      console.log('Appointment', appointments);
-
-      console.log('providers', filterProviders(10));
-    }
-
     const showUserAppointments = filterWithUserId.map((appointment, index) => (
       <div key={index} className="col-md-6 col-lg-4">
         <div className="card mb-4">

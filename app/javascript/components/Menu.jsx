@@ -30,17 +30,17 @@ export default class Menu extends Component {
           <p className="user-name">@{user.name}</p>
         </div>
         <div className="menu-items">
-          <Link to="/" className="menu-item" href="#">
+          <Link to="/" className={`menu-item`} href="#">
             Home
           </Link>
-          <Link to="/providers" className="menu-item" href="#">
+          <Link to="/providers" className={`menu-item`}>
             Partners
           </Link>
-          <Link to={`/appointments/${user.id}`} className="menu-item" href="#">
+          <Link to={`/appointments/${user.id}`} className={`menu-item`}>
             Appointments
           </Link>
           {userStatus.admin === true ? (
-            <Link to={`/provider`} className="menu-item" href="#">
+            <Link to={`/provider`} className="menu-item">
               NEW PARTNER
             </Link>
           ) : (

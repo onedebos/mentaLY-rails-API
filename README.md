@@ -1,6 +1,6 @@
 # Project Name
 
-> This is a fullstack app that allows people schedule
+> This is a tablet(intended to be viewed on tablets) web app that allows people schedule
 > appointments with mental health service providers in Nigeria.
 
 ![screenshot](./app_screenshot.png)
@@ -102,6 +102,7 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - Thanks to [Murat Kohmaz](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) for his design.
+- Thanks to [Jessica Felicio](https://unsplash.com/photos/QS9ZX5UnS14) for images
 
 ## 📝 License
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CardField from '../auth/CardField';
+import '../styles/ProviderComponent.css';
 
 class Provider extends React.Component {
   constructor(props) {
@@ -60,8 +62,65 @@ class Provider extends React.Component {
     const { userStatus } = this.props;
 
     return (
-      <div className="">
-        <div className="hero position-relative d-flex align-items-center justify-content-center">
+      <div className="provider-bg">
+        <div className="scream-div">
+          <img
+            className="screaming"
+            src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=664&q=80"
+          />
+        </div>
+        <div className="provider-component-wrapper">
+          <div className="provider-information-wrapper">
+            <div className="provider-information-name-div">
+              <h3 className="provider-information-name">{provider.name}</h3>
+            </div>
+            <div className="card-fields">
+              <CardField infoOne="E-mail:" infoTwo={provider.email} />
+              <CardField infoOne="State: " infoTwo={provider.state} />
+            </div>
+            <div className="provider-information-description">
+              {provider.description}
+            </div>
+          </div>
+          <div className="provider-info-buttons">
+            <div className="p-btn">
+              <Link to="/providers" className="provider-info-btns">
+                Back to providers
+              </Link>
+            </div>
+            <div className="p-btn">
+              <Link
+                to={`/make_appointment/${provider.id}`}
+                className="provider-info-btns"
+              >
+                Book appointment with this provider
+              </Link>
+            </div>
+
+            {userStatus.admin === true ? (
+              <div>
+                <div className="p-btn">
+                  <Link
+                    to=""
+                    onClick={this.deleteProvider}
+                    className="provider-info-btns"
+                  >
+                    Delete Provider
+                  </Link>
+                </div>
+                <Link
+                  to={`/edit/${provider.id}`}
+                  className="provider-info-btns"
+                >
+                  Edit details
+                </Link>
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+        {/* <div className="hero position-relative d-flex align-items-center justify-content-center">
           <img
             src={provider.logo}
             alt={`${provider.name} image`}
@@ -113,7 +172,7 @@ class Provider extends React.Component {
           ) : (
             ''
           )}
-        </div>
+        </div> */}
       </div>
     );
   }

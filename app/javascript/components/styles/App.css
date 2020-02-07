@@ -2,3 +2,7 @@
   display: grid;
   grid-template-columns: 2fr 6fr;
 }
+
+.active {
+  background-color: #96be0f;
+}

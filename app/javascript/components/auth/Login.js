@@ -62,6 +62,7 @@ export class Login extends Component {
       <div className="login-bg">
         <div className="login-wrapper">
           <p className="login-errors">{LoginErrors}</p>
+          <h3 className="login-logo">MentaLLy</h3>
           <h3 className="login-title">Log in</h3>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <Field
@@ -84,16 +85,6 @@ export class Login extends Component {
               <input type="checkbox" />
               <label>Remember me</label>
             </div>
-            {/* <div className="login-btn">
-              <button type="submit">Log in</button>
-            </div>
-            <hr className="hr-3" />
-            <div className="back-sign-up">
-              <Link to="/sign_up">Sign up</Link>
-            </div>
-            <div className="forgot">
-              <Link to="/">Forgot your password?</Link>
-            </div> */}
             <Submit
               buttonType="submit"
               buttonText="Sign in"

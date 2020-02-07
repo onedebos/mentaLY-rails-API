@@ -37,6 +37,10 @@
   padding: 20px 0px;
 }
 
-.menu-item:focus {
-  background-color: #97bf0f;
+.menu-item:target {
+  background-color: #906717;
+}
+
+.menu-item:active {
+  background-color: #906717;
 }

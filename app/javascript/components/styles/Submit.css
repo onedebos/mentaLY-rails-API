@@ -1,14 +1,15 @@
 @import 'reset.css';
 
 .login-btn button {
-  margin-top: 1.5em;
+  margin-top: 1.2em;
+  font-family: CircularStd;
   padding: 0.5em 1.5em;
   border-radius: 5%;
   border: 0;
   background-color: #516270;
   font-size: 1.2em;
   color: white;
-  margin-bottom: 1.5em;
+  margin-bottom: 1.2em;
 }
 
 .forgot,

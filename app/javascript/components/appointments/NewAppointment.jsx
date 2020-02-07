@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import statesInNigeria from './statesInNigeria';
+import '../styles/NewAppointment.css';
 
 class NewAppointment extends React.Component {
   constructor(props) {
@@ -57,8 +58,6 @@ class NewAppointment extends React.Component {
     this.setState({ [user_id]: userStatus.id });
     if (city.length == 0 || date.length == 0 || time.length == 0) return;
 
-    // console.log('submit cicked');
-
     const body = {
       city,
       date,
@@ -92,11 +91,11 @@ class NewAppointment extends React.Component {
     const displayErrors = () => <div>{errors}</div>;
     const { handleLogin } = this.props;
     return (
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-sm-12 col-lg-6 offset-lg-3">
+      <div className="make-appointment-bg">
+        <div className="make-appointment-container">
+          <div className="make-appointment-wrapper">
             {errors.length > 0 ? displayErrors() : ''}
-            <h1 className="font-weight-normal mb-5">
+            <h1 className="make-appointment-title">
               Make an appointment with {provider.name}
             </h1>
             <form onSubmit={this.onSubmit}>
@@ -105,7 +104,6 @@ class NewAppointment extends React.Component {
                 <select
                   name="city"
                   id="city"
-                  className="form-control"
                   required
                   onChange={this.onChange}
                   placeholder="Lagos"
@@ -119,7 +117,6 @@ class NewAppointment extends React.Component {
                   type="date"
                   name="date"
                   id="date"
-                  className="form-control"
                   required
                   placeholder="12/02/2020"
                   onChange={this.onChange}
@@ -131,22 +128,22 @@ class NewAppointment extends React.Component {
                   type="time"
                   name="time"
                   id="time"
-                  className="form-control"
                   required
                   placeholder="12 : 35"
                   onChange={this.onChange}
                 />
-                <small id="logoHelp" className="form-text text-muted">
-                  24hr clock
-                </small>
+                <small id="logoHelp">24hr clock</small>
               </div>
-
-              <button type="submit" className="btn custom-button mt-3">
-                Create appointment
-              </button>
-              <Link to="/providers" className="btn btn-link mt-3">
-                Back to Providers
-              </Link>
+              <div className="btn-div">
+                <button type="submit" className="make-appointment-btn">
+                  Create appointment
+                </button>
+              </div>
+              <div className="btn-link-providers">
+                <Link to="/providers" className="btn-link-providers">
+                  Back to Providers
+                </Link>
+              </div>
             </form>
           </div>
         </div>
