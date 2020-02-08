@@ -4,7 +4,6 @@ import axios from 'axios';
 import Menu from './Menu';
 import Home from '../components/Home';
 import Providers from '../components/provider/Providers';
-import UserCon from '../components/container/User';
 import ProviderComponent from './provider/ProviderComponent';
 import NewProvider from '../components/provider/NewProvider';
 import NewAppointment from '../components/appointments/NewAppointment';

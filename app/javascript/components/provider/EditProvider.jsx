@@ -50,8 +50,6 @@ class EditProvider extends React.Component {
     const url = `/api/v1/providers/${id}`;
     const { name, email, state, logo, description } = this.state;
 
-    if (name.length == 0 || email.length == 0 || state.length == 0) return;
-
     const body = {
       name,
       email,

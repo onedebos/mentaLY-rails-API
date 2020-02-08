@@ -85,7 +85,7 @@ class Provider extends React.Component {
           <div className="provider-info-buttons">
             <div className="p-btn">
               <Link to="/providers" className="provider-info-btns">
-                Back to providers
+                Back to our partners
               </Link>
             </div>
             <div className="p-btn">
@@ -93,7 +93,7 @@ class Provider extends React.Component {
                 to={`/make_appointment/${provider.id}`}
                 className="provider-info-btns"
               >
-                Book appointment with this provider
+                Book an appointment with {provider.name}
               </Link>
             </div>
 
@@ -105,9 +105,17 @@ class Provider extends React.Component {
                     onClick={this.deleteProvider}
                     className="provider-info-btns"
                   >
-                    Delete Provider
+                    Delete Partner
                   </Link>
                 </div>
+                {/* <div className="p-btn">
+                  <Link
+                    to={`/edit/${provider.id}`}
+                    className="provider-info-btns"
+                  >
+                    Edit Partner
+                  </Link>
+                </div> */}
               </div>
             ) : (
               ''

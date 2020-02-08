@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import statesInNigeria from './statesInNigeria';
 import '../styles/NewAppointment.css';
+import { PassThrough } from 'stream';
 
 class NewAppointment extends React.Component {
   constructor(props) {
@@ -56,7 +57,12 @@ class NewAppointment extends React.Component {
     const { city, date, time, user_id } = this.state;
     const { userStatus } = this.props;
     this.setState({ [user_id]: userStatus.id });
-    if (city.length == 0 || date.length == 0 || time.length == 0) return;
+    if (city.length > 0 || date < Date.now || time.length > 0) {
+      this.setState({ errors: "You can't use a date in the past" });
+      return;
+    } else if (city.length === 0 || date.length === 0 || time.length === 0) {
+      return;
+    }
 
     const body = {
       city,
@@ -76,7 +82,7 @@ class NewAppointment extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-          this.props.history.push(`/providers`);
+          this.props.history.push(`/appointments/${user_id}`);
           return response.json();
         }
         throw new Error('Network response was not ok.');
@@ -88,8 +94,8 @@ class NewAppointment extends React.Component {
     const { provider, errors } = this.state;
     const displayStatesInNigeria = () =>
       statesInNigeria.map((state, k) => <option key={k}>{state}</option>);
-    const displayErrors = () => <div>{errors}</div>;
-    const { handleLogin } = this.props;
+    const displayErrors = () => <div className="login-errors">{errors}</div>;
+
     return (
       <div className="make-appointment-bg">
         <div className="make-appointment-container">

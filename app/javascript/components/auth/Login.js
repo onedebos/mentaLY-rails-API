@@ -55,7 +55,6 @@ export class Login extends Component {
       });
   }
   render() {
-    const { loggedInStatus } = this.props;
     const { email, password, LoginErrors } = this.state;
 
     return (
