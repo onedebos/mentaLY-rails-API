@@ -13,3 +13,7 @@
 .password-field {
   padding-bottom: 0.5em;
 }
+
+.label {
+  font-family: CircularStd;
+}

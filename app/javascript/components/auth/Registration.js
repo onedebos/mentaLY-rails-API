@@ -88,6 +88,8 @@ export class Registration extends Component {
               value={name}
               onChange={this.handleChange}
               type="name"
+              id="name"
+              name="name"
             />
             <Field
               label="E-mail"

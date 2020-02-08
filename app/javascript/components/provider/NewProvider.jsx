@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import statesInNigeria from '../appointments/statesInNigeria';
+import DisplayAllTitles from '../auth/DisplayAllTtitles';
+import Field from '../auth/Field';
+import '../styles/NewProvider.css';
 
 class NewProvider extends React.Component {
   constructor(props) {
@@ -58,41 +61,39 @@ class NewProvider extends React.Component {
     const displayStatesInNigeria = () =>
       statesInNigeria.map((state, k) => <option key={k}>{state}</option>);
     return (
-      <div className="container mt-5">
-        <div className="row">
+      <div className="container">
+        <div className="row new-provider-wrapper">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
-            <h1 className="font-weight-normal mb-5">
-              Add a new Provider to the list.
-            </h1>
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label htmlFor="recipeName">Provider name: </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="providerName"
-                  className="form-control"
-                  required
-                  onChange={this.onChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="form-control"
-                  required
-                  onChange={this.onChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">State:</label>
+            <DisplayAllTitles
+              main="Add a new provider/partner"
+              sub={`You're signed in as an admin.`}
+            />
+            <form className="new-provider-form" onSubmit={this.onSubmit}>
+              <Field
+                name="name"
+                label="Name: "
+                onChange={this.onChange}
+                type="text"
+                name="name"
+                id="name"
+              />
+
+              <Field
+                name="email"
+                label="Email: "
+                onChange={this.onChange}
+                type="email"
+                name="email"
+                id="email"
+              />
+              <div className="state-group">
+                <label className="state-label" htmlFor="email">
+                  State:
+                </label>
                 <select
                   name="state"
                   id="state"
-                  className="form-control"
+                  className="form-control-state"
                   required
                   onChange={this.onChange}
                   placeholder="Lagos"
@@ -100,35 +101,40 @@ class NewProvider extends React.Component {
                   {displayStatesInNigeria()}
                 </select>
               </div>
-              <div className="form-group">
-                <label htmlFor="email">logo:</label>
-                <input
-                  type="url"
-                  name="logo"
-                  id="logo"
-                  className="form-control"
-                  required
-                  onChange={this.onChange}
-                />
-                <small id="logoHelp" className="form-text text-muted">
-                  Enter a URL where the logo is located
-                </small>
-              </div>
-              <label htmlFor="description">Description</label>
-              <textarea
-                className="form-control"
-                id="description"
-                name="description"
-                rows="3"
+
+              <Field
+                name="logo"
+                label="Logo URL: "
                 onChange={this.onChange}
+                type="url"
+                name="logo"
+                id="logo"
               />
-              <button type="submit" className="btn custom-button mt-3">
+
+              <div className="description-label">
+                <label htmlFor="description">Description</label>
+                <div>
+                  <textarea
+                    className="form-control-txtarea"
+                    id="description"
+                    name="description"
+                    rows="3"
+                    onChange={this.onChange}
+                  />
+                </div>
+              </div>
+              <button type="submit" className="make-provider-btn">
                 Create Provider
               </button>
+            </form>
+            {/* 
+
+
+
               <Link to="/providers" className="btn btn-link mt-3">
                 Back to Providers
               </Link>
-            </form>
+            </form> */}
           </div>
         </div>
       </div>
