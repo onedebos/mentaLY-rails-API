@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import axios from 'axios';
 import './styles/Home.css';
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
@@ -24,13 +22,6 @@ const getUser = () => {
   };
 };
 
-export function getUsersSuccess(json) {
-  return {
-    type: GET_USERS_SUCCESS,
-    json,
-  };
-}
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -46,14 +37,6 @@ class Home extends React.Component {
   render() {
     const { loggedInStatus } = this.props;
 
-    const { users } = this.props;
-    const userInfo = users.map(user => (
-      <div key={user.name}>
-        {user.id}
-        {user.name}
-        {user.email}
-      </div>
-    ));
     return (
       <div className="home-body">
         <header>
@@ -98,10 +81,4 @@ class Home extends React.Component {
   }
 }
 
-const StructuredSelector = createStructuredSelector({
-  users: state => state.users,
-});
-
-const mapDispatchToProps = { getUser };
-
-export default connect(StructuredSelector, mapDispatchToProps)(Home);
+export default Home;

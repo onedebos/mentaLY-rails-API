@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-import ProtectedRoute from './protected.route';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import reducers from '../components/reducers/Index';
+
+let store = createStore(reducers, applyMiddleware(thunk));
+
 import Menu from './Menu';
 import Home from '../components/Home';
 import Providers from '../components/provider/Providers';
-import configureStore from '../configureStore';
+import UserCon from '../components/container/User';
 import ProviderComponent from './provider/ProviderComponent';
 import NewProvider from '../components/provider/NewProvider';
 import NewAppointment from '../components/appointments/NewAppointment';
@@ -17,7 +22,6 @@ import Login from '../components/auth/Login';
 import Appointments from '../components/appointments/Appointments';
 import UserAppointment from '../components/appointments/UserAppointment';
 import './styles/App.css';
-const store = configureStore();
 
 export default class App extends Component {
   constructor(props) {
@@ -104,7 +108,10 @@ export default class App extends Component {
                   />
                 )}
               />
-
+              <Route
+                path={'/usercon'}
+                render={props => <UserCon {...props} />}
+              />
               <Route
                 exact
                 path={'/sign_up'}

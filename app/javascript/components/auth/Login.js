@@ -28,7 +28,7 @@ export class Login extends Component {
 
   handleSubmit(e) {
     const { email, password } = this.state;
-    const { handleLogin, history } = this.props;
+
     e.preventDefault();
     axios
       .post(
