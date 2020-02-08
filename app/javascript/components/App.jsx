@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import reducers from '../components/reducers/Index';
-
-let store = createStore(reducers, applyMiddleware(thunk));
-
 import Menu from './Menu';
 import Home from '../components/Home';
 import Providers from '../components/provider/Providers';
@@ -84,130 +76,122 @@ export default class App extends Component {
 
     return (
       <div>
-        <Provider store={store}>
-          <Router>
-            <Switch>
-              <Route
-                exact
-                path={'/'}
-                render={props => (
-                  <Home
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    handleLogout={this.handleLogout}
-                  />
-                )}
-              />
-              <Route
-                path={'/login'}
-                render={props => (
-                  <Login
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                    handleLogin={this.handleLogin}
-                  />
-                )}
-              />
-              <Route
-                path={'/usercon'}
-                render={props => <UserCon {...props} />}
-              />
-              <Route
-                exact
-                path={'/sign_up'}
-                render={props => (
-                  <Registration
-                    {...props}
-                    handleLogin={this.handleLogin}
-                    loggedInStatus={loggedInStatus}
-                  />
-                )}
-              />
-              <React.Fragment>
-                <div className="App-styles">
-                  <Menu
-                    loggedInStatus={loggedInStatus}
-                    userStatus={user}
-                    handleLogout={this.handleLogout}
-                  />
+        <Router>
+          <Switch>
+            <Route
+              exact
+              path={'/'}
+              render={props => (
+                <Home
+                  {...props}
+                  loggedInStatus={loggedInStatus}
+                  handleLogout={this.handleLogout}
+                />
+              )}
+            />
+            <Route
+              path={'/login'}
+              render={props => (
+                <Login
+                  {...props}
+                  loggedInStatus={loggedInStatus}
+                  handleLogin={this.handleLogin}
+                />
+              )}
+            />
 
-                  <Route
-                    exact
-                    path={'/providers'}
-                    render={props => (
-                      <Providers
-                        {...props}
-                        loggedInStatus={loggedInStatus}
-                        userStatus={user}
-                      />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path={'/provider/:id'}
-                    render={props => (
-                      <ProviderComponent
-                        {...props}
-                        loggedInStatus={loggedInStatus}
-                        userStatus={user}
-                      />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path={'/provider/'}
-                    render={props => (
-                      <NewProvider {...props} loggedInStatus={loggedInStatus} />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path={'/make_appointment/:id'}
-                    render={props => (
-                      <NewAppointment
-                        {...props}
-                        loggedInStatus={loggedInStatus}
-                        userStatus={user}
-                      />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path={'/appointments/:id'}
-                    render={props => (
-                      <UserAppointment
-                        {...props}
-                        loggedInStatus={loggedInStatus}
-                        userStatus={user}
-                      />
-                    )}
-                  />
-                  <Route
-                    path={'/edit/:id'}
-                    render={props => (
-                      <EditProvider
-                        {...props}
-                        loggedInStatus={loggedInStatus}
-                      />
-                    )}
-                  />
+            <Route
+              exact
+              path={'/sign_up'}
+              render={props => (
+                <Registration
+                  {...props}
+                  handleLogin={this.handleLogin}
+                  loggedInStatus={loggedInStatus}
+                />
+              )}
+            />
+            <React.Fragment>
+              <div className="App-styles">
+                <Menu
+                  loggedInStatus={loggedInStatus}
+                  userStatus={user}
+                  handleLogout={this.handleLogout}
+                />
 
-                  <Route
-                    path={'/user_appointments'}
-                    render={props => (
-                      <Appointments
-                        {...props}
-                        loggedInStatus={loggedInStatus}
-                        handleLogin={this.handleLogin}
-                        userStatus={user}
-                      />
-                    )}
-                  />
-                </div>
-              </React.Fragment>
-            </Switch>
-          </Router>
-        </Provider>
+                <Route
+                  exact
+                  path={'/providers'}
+                  render={props => (
+                    <Providers
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/provider/:id'}
+                  render={props => (
+                    <ProviderComponent
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/provider/'}
+                  render={props => (
+                    <NewProvider {...props} loggedInStatus={loggedInStatus} />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/make_appointment/:id'}
+                  render={props => (
+                    <NewAppointment
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={'/appointments/:id'}
+                  render={props => (
+                    <UserAppointment
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      userStatus={user}
+                    />
+                  )}
+                />
+                <Route
+                  path={'/edit/:id'}
+                  render={props => (
+                    <EditProvider {...props} loggedInStatus={loggedInStatus} />
+                  )}
+                />
+
+                <Route
+                  path={'/user_appointments'}
+                  render={props => (
+                    <Appointments
+                      {...props}
+                      loggedInStatus={loggedInStatus}
+                      handleLogin={this.handleLogin}
+                      userStatus={user}
+                    />
+                  )}
+                />
+              </div>
+            </React.Fragment>
+          </Switch>
+        </Router>
       </div>
     );
   }

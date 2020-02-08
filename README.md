@@ -69,6 +69,13 @@ http://localhost:3000
 
 in your browser. You should see the app running!
 
+You can sign up and sign in from here.
+
+To access the Admin account/panel, use the following information.
+
+- email: admin@mentallybook.com
+- password: password
+
 ### Run tests
 
 Run modele tests
