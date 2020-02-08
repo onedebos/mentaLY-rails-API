@@ -76,9 +76,11 @@ To access the Admin account/panel, use the following information.
 - email: admin@mentallybook.com
 - password: password
 
+- Admin can create a new provider.
+
 ### Run tests
 
-Run modele tests
+Run model tests
 
 ```
 bundle exec rspec

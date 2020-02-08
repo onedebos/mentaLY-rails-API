@@ -108,12 +108,6 @@ class Provider extends React.Component {
                     Delete Provider
                   </Link>
                 </div>
-                <Link
-                  to={`/edit/${provider.id}`}
-                  className="provider-info-btns"
-                >
-                  Edit details
-                </Link>
               </div>
             ) : (
               ''
