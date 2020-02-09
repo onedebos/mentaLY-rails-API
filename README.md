@@ -1,6 +1,6 @@
 # Project Name
 
-> This is a tablet(intended to be viewed on tablets) web app that allows people schedule
+> This is the API that serves a tablet(intended to be viewed on tablets) web app that > allows people schedule
 > appointments with mental health service providers in Nigeria.
 
 ![screenshot](./app_screenshot.png)

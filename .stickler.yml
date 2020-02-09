@@ -3,8 +3,6 @@ linters:
   rubocop:
     display_cop_names: true
       config: './rubocop.yml'
-        eslint:
-          config: './.eslintrc.json'
 
 files:
   ignore:
