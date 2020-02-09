@@ -1,0 +1,9 @@
+{
+  "name": "mentally-api",
+  "version": "1",
+  "description": "App for scheduling appointments with mental health providers in Nigeria",
+  "main": "index.js",
+  "repository": "https://github.com/onedebos/mentaLY-rails-API",
+  "author": "Adebola <onedebos@gmail.com>",
+  "license": "MIT"
+}
