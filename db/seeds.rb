@@ -7,7 +7,7 @@
 
 
 
-Provider.create(
+Provider.create!(
     name:'Mentally Aware',
     email:'contact@mentallyaware.org',
     state:'Lagos',
@@ -15,7 +15,7 @@ Provider.create(
     description: 'We are focused on ending mental health stigma, and creating a comfortable environment for open conversations about mental health issues. As an organization, we have come to understand the importance of stories in challenging inbred notions about mental health issues, especially when the stories come from those with lived experience. This is what our campaigns revolve around and we can already see the change in attitude that has occurred as a result of this.'
 )
 
-Provider.create(
+Provider.create!(
     name:'MyPaddi',
     email:'admin@mypadding.com',
     state:'Ondo',
@@ -23,7 +23,7 @@ Provider.create(
     description: 'Online community of young people accessing sexual & reproductive health information & products anonymously'
 )
 
-Provider.create(
+Provider.create!(
     name:'Mental Health Foundation',
     email:'owoyemi@mentalhealthnigeria.org',
     state:'Ekiti',
@@ -31,7 +31,7 @@ Provider.create(
     description: 'Mental Health Foundation works assiduously to help all people prevent and overcome mental disorders, providing adequate information, education, encouragement, and support for people living with either mild or severe mental disorders alongside their family member.'
 )
 
-Provider.create(
+Provider.create!(
     name:'Stand to End Rape(STER)',
     email:'STERAbuja@standtoendrape.org',
     state:'Abuja',
@@ -39,7 +39,7 @@ Provider.create(
     description: 'We are a youth-led Not-for-Profit Organization advocating against sexual violence, providing prevention mechanisms and supporting survivors with psychosocial services. We advocate for rape survivors who can’t speak about their ordeal due to stigmatization, by enlighten our community on the need to end rape and victim blaming.'
 )
 
-Provider.create(
+Provider.create!(
     name:'Aro Neuropsychiatric Hospital',
     email:'aro@aro.ng',
     state:'Ogun',
@@ -47,7 +47,7 @@ Provider.create(
     description: 'A federal institution (hospital) where mentally ill patients are cared for without attaching any stigma and it is rich with historical legacy since inception.'
 )
 
-Provider.create(
+Provider.create!(
     name:'PsychNG Services',
     email:'book@psychng.com',
     state:'Lagos',
@@ -56,7 +56,7 @@ Provider.create(
 )
 
 
-Appointment.create(
+Appointment.create!(
     city: 'Lagos',
     user_id:2,
     provider_id:1,
@@ -64,7 +64,7 @@ Appointment.create(
     time:'22:50'
 )
 
-Appointment.create(
+Appointment.create!(
     city: 'Lagos',
     user_id:2,
     provider_id:1,
@@ -72,7 +72,7 @@ Appointment.create(
     time:'22:50'
 )
 
-Appointment.create(
+Appointment.create!(
     city: 'Lagos',
     user_id:2,
     provider_id:1,
@@ -80,7 +80,7 @@ Appointment.create(
     time:'22:50'
 )
 
-Appointment.create(
+Appointment.create!(
     city: 'Lagos',
     user_id:2,
     provider_id:1,
@@ -88,7 +88,7 @@ Appointment.create(
     time:'22:50'
 )
 
-User.create(
+User.create!(
     id:2,
     name: 'a',
     email: 'a@b.com',
