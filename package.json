@@ -32,10 +32,7 @@
     "uuidv4": "^6.0.2"
   },
   "scripts": {
-    "start": "./bin/webpack-dev-server",
-    "build": "cd client && yarn install && yarn build && cd ..",
-    "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+    "start": "./bin/webpack-dev-server"
   },
   "version": "0.1.0",
   "devDependencies": {
