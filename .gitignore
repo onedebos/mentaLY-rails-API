@@ -13,6 +13,7 @@
 !/log/.keep
 !/tmp/.keep
 /test.js
+yarn.lock
 
 # Ignore uploaded files in development.
 /storage/*
