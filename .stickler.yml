@@ -3,8 +3,6 @@ linters:
   rubocop:
     display_cop_names: true
       config: './rubocop.yml'
-        eslint:
-          config: './.eslintrc.json'
 
 files:
   ignore:
@@ -15,3 +13,4 @@ files:
     - 'Rakefile'
     - 'README.md'
     - 'node_modules/**/*'
+    - 'app/controllers/concerns/current_user_concern.rb'
