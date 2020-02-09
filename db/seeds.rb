@@ -60,7 +60,9 @@ User.create!(
     id:2,
     name: 'Admin Panel',
     email: 'admin@mentallybook.com',
-    password: 'password'
+    password: 'password',
+    admin: true
+
 )
 
 Appointment.create!(
