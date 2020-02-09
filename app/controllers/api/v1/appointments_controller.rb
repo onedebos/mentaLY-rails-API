@@ -1,8 +1,5 @@
 class Api::V1::AppointmentsController < ApplicationController
-  # before_action :authenticate_user!
   before_action :set_appointment, only: %i[show edit update destroy]
-
-  include CurrentUserConcern
 
   def index
     @appointments = Appointment.all.order(created_at: :desc)
@@ -12,7 +9,6 @@ class Api::V1::AppointmentsController < ApplicationController
   def create
     @provider = Provider.find(params[:provider_id])
     @appointment = @provider.appointments.create!(appointment_params)
-    @appointment.user_id = @current_user.id
     if @appointment.save
       render json: @appointment
     else
