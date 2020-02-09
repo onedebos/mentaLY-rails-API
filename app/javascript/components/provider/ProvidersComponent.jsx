@@ -1,14 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import '../styles/ProvidersComponent.css';
 
-const ProvidersComponent = ({
-  imageURL,
-  name,
-  providerURL,
-  appointmentURL,
-  alt,
-}) => {
+const ProvidersComponent = ({ imageURL, name, providerURL, appointmentURL, alt }) => {
   return (
     <div>
       <div className="display-providers-model">
@@ -28,6 +23,22 @@ const ProvidersComponent = ({
       </div>
     </div>
   );
+};
+
+ProvidersComponent.propTypes = {
+  name: PropTypes.string,
+  imageURL: PropTypes.string,
+  providerURL: PropTypes.string,
+  appointmentURL: PropTypes.string,
+  alt: PropTypes.string,
+};
+
+ProvidersComponent.defaultProps = {
+  name: '',
+  providerURL: '',
+  appointmentURL: '',
+  alt: '',
+  imageURL: '',
 };
 
 export default ProvidersComponent;

@@ -1,26 +1,14 @@
-import React, { Component } from 'react';
+/* eslint-disable import/no-duplicates */
+/* eslint-disable react/forbid-prop-types */
+import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './styles/Home.css';
+import PropTypes from 'prop-types';
+
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const GET_USERS_REQUEST = 'GET_USER_REQUEST';
-const GET_USERS_SUCCESS = 'GET_USER_SUCCESS';
-
-const getUser = () => {
-  console.log('getUser() Action!');
-  return dispatch => {
-    dispatch({ type: GET_USERS_REQUEST });
-    return axios
-      .get('/api/v1/providers', { withCredentials: true })
-      .then(response => response.data)
-      .then(json => dispatch(getUsersSuccess(json)))
-      .catch(error => console.log(error));
-  };
-};
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,8 +18,9 @@ class Home extends React.Component {
   }
 
   handleSuccessfulAuth(data) {
-    this.props.handleLogin(data);
-    this.props.history.push('/providers');
+    const { handleLogin, history } = this.props;
+    handleLogin(data);
+    history.push('/providers');
   }
 
   render() {
@@ -50,28 +39,22 @@ class Home extends React.Component {
           {loggedInStatus === 'NOT_LOGGED_IN' ? (
             <div>
               <Link to="/sign_up">
-                <button className="sign-up">
+                <button className="sign-up" type="button">
                   Sign up to book
-                  <FontAwesomeIcon
-                    className="sign-up-arrow"
-                    icon={faChevronCircleRight}
-                  />
+                  <FontAwesomeIcon className="sign-up-arrow" icon={faChevronCircleRight} />
                 </button>
               </Link>
               <div>
                 <p className="have-account">have an account?</p>
                 <Link to="/login" className="sign-in">
                   Sign in
-                  <FontAwesomeIcon
-                    className="sign-up-arrow"
-                    icon={faChevronCircleRight}
-                  />
+                  <FontAwesomeIcon className="sign-up-arrow" icon={faChevronCircleRight} />
                 </Link>
               </div>
             </div>
           ) : (
             <p className="signed-in">
-              You're signed in. &nbsp;
+              You are signed in. &apos;
               <Link to="/providers">See our partners</Link>
             </p>
           )}
@@ -80,5 +63,16 @@ class Home extends React.Component {
     );
   }
 }
+Home.propTypes = {
+  handleLogin: PropTypes.func,
+  history: PropTypes.object,
+  loggedInStatus: PropTypes.string,
+};
+
+Home.defaultProps = {
+  handleLogin: () => {},
+  history: {},
+  loggedInStatus: '',
+};
 
 export default Home;

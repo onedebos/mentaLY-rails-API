@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/DisplayAllTitles.css';
+import PropTypes from 'prop-types';
 
 const DisplayAllTitles = ({ main, sub }) => {
   return (
@@ -11,6 +12,16 @@ const DisplayAllTitles = ({ main, sub }) => {
       </div>
     </div>
   );
+};
+
+DisplayAllTitles.propTypes = {
+  main: PropTypes.string,
+  sub: PropTypes.string,
+};
+
+DisplayAllTitles.defaultProps = {
+  main: '',
+  sub: '',
 };
 
 export default DisplayAllTitles;

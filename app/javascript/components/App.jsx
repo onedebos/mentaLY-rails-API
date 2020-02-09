@@ -1,17 +1,19 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import Menu from './Menu';
-import Home from '../components/Home';
-import Providers from '../components/provider/Providers';
+import Home from './Home';
+import Providers from './provider/Providers';
 import ProviderComponent from './provider/ProviderComponent';
-import NewProvider from '../components/provider/NewProvider';
-import NewAppointment from '../components/appointments/NewAppointment';
-import EditProvider from '../components/provider/EditProvider';
-import Registration from '../components/auth/Registration';
-import Login from '../components/auth/Login';
-import Appointments from '../components/appointments/Appointments';
-import UserAppointment from '../components/appointments/UserAppointment';
+import NewProvider from './provider/NewProvider';
+import NewAppointment from './appointments/NewAppointment';
+import EditProvider from './provider/EditProvider';
+import Registration from './auth/Registration';
+import Login from './auth/Login';
+import Appointments from './appointments/Appointments';
+import UserAppointment from './appointments/UserAppointment';
 import './styles/App.css';
 
 export default class App extends Component {
@@ -26,35 +28,28 @@ export default class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  componentDidMount() {
+    this.checkLoginStatus();
+  }
+
   checkLoginStatus() {
+    const { loggedInStatus } = this.state;
     axios
       .get('/api/v1/logged_in', { withCredentials: true })
       .then(response => {
-        if (
-          response.data.logged_in &&
-          this.state.loggedInStatus === 'NOT_LOGGED_IN'
-        ) {
+        if (response.data.logged_in && loggedInStatus === 'NOT_LOGGED_IN') {
           this.setState({
             loggedInStatus: 'LOGGED_in',
             user: response.data.user,
           });
-        } else if (
-          !response.data.logged_in &&
-          this.state.loggedInStatus === 'LOGGED_IN'
-        ) {
+        } else if (!response.data.logged_in && loggedInStatus === 'LOGGED_IN') {
           this.setState({
             loggedInStatus: 'NOT_LOGGED_in',
             user: {},
           });
         }
       })
-      .catch(error => {
-        console.log('check login err', error);
-      });
-  }
-
-  componentDidMount() {
-    this.checkLoginStatus();
+      .catch(error => error);
   }
 
   handleLogout() {
@@ -70,6 +65,7 @@ export default class App extends Component {
       user: data.user,
     });
   }
+
   render() {
     const { loggedInStatus, user } = this.state;
 
@@ -79,29 +75,21 @@ export default class App extends Component {
           <Switch>
             <Route
               exact
-              path={'/'}
+              path="/"
               render={props => (
-                <Home
-                  {...props}
-                  loggedInStatus={loggedInStatus}
-                  handleLogout={this.handleLogout}
-                />
+                <Home {...props} loggedInStatus={loggedInStatus} handleLogout={this.handleLogout} />
               )}
             />
             <Route
-              path={'/login'}
+              path="/login"
               render={props => (
-                <Login
-                  {...props}
-                  loggedInStatus={loggedInStatus}
-                  handleLogin={this.handleLogin}
-                />
+                <Login {...props} loggedInStatus={loggedInStatus} handleLogin={this.handleLogin} />
               )}
             />
 
             <Route
               exact
-              path={'/sign_up'}
+              path="/sign_up"
               render={props => (
                 <Registration
                   {...props}
@@ -110,7 +98,7 @@ export default class App extends Component {
                 />
               )}
             />
-            <React.Fragment>
+            <>
               <div className="App-styles">
                 <Menu
                   loggedInStatus={loggedInStatus}
@@ -120,18 +108,14 @@ export default class App extends Component {
 
                 <Route
                   exact
-                  path={'/providers'}
+                  path="/providers"
                   render={props => (
-                    <Providers
-                      {...props}
-                      loggedInStatus={loggedInStatus}
-                      userStatus={user}
-                    />
+                    <Providers {...props} loggedInStatus={loggedInStatus} userStatus={user} />
                   )}
                 />
                 <Route
                   exact
-                  path={'/provider/:id'}
+                  path="/provider/:id"
                   render={props => (
                     <ProviderComponent
                       {...props}
@@ -142,42 +126,30 @@ export default class App extends Component {
                 />
                 <Route
                   exact
-                  path={'/provider/'}
+                  path="/provider/"
+                  render={props => <NewProvider {...props} loggedInStatus={loggedInStatus} />}
+                />
+                <Route
+                  exact
+                  path="/make_appointment/:id"
                   render={props => (
-                    <NewProvider {...props} loggedInStatus={loggedInStatus} />
+                    <NewAppointment {...props} loggedInStatus={loggedInStatus} userStatus={user} />
                   )}
                 />
                 <Route
                   exact
-                  path={'/make_appointment/:id'}
+                  path="/appointments/:id"
                   render={props => (
-                    <NewAppointment
-                      {...props}
-                      loggedInStatus={loggedInStatus}
-                      userStatus={user}
-                    />
+                    <UserAppointment {...props} loggedInStatus={loggedInStatus} userStatus={user} />
                   )}
                 />
                 <Route
-                  exact
-                  path={'/appointments/:id'}
-                  render={props => (
-                    <UserAppointment
-                      {...props}
-                      loggedInStatus={loggedInStatus}
-                      userStatus={user}
-                    />
-                  )}
-                />
-                <Route
-                  path={'/edit/:id'}
-                  render={props => (
-                    <EditProvider {...props} loggedInStatus={loggedInStatus} />
-                  )}
+                  path="/edit/:id"
+                  render={props => <EditProvider {...props} loggedInStatus={loggedInStatus} />}
                 />
 
                 <Route
-                  path={'/user_appointments'}
+                  path="/user_appointments"
                   render={props => (
                     <Appointments
                       {...props}
@@ -188,7 +160,7 @@ export default class App extends Component {
                   )}
                 />
               </div>
-            </React.Fragment>
+            </>
           </Switch>
         </Router>
       </div>

@@ -1,7 +1,11 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import DisplayAllTitles from '../auth/DisplayAllTtitles';
 import AppointmentCard from './AppointmentCard';
+
 import '../styles/UserAppointments.css';
 
 class UserAppointment extends React.Component {
@@ -14,6 +18,7 @@ class UserAppointment extends React.Component {
   }
 
   componentDidMount() {
+    const { history } = this.props;
     const url = '/api/v1/appointments';
     fetch(url)
       .then(response => {
@@ -23,7 +28,7 @@ class UserAppointment extends React.Component {
         throw new Error('Network response was not ok.');
       })
       .then(response => this.setState({ appointments: response }))
-      .catch(() => this.props.history.push('/'));
+      .catch(() => history.push('/'));
 
     fetch('/api/v1/providers')
       .then(response => {
@@ -33,7 +38,7 @@ class UserAppointment extends React.Component {
         throw new Error('Network response was not ok.');
       })
       .then(response => this.setState({ providers: response }))
-      .catch(() => this.props.history.push('/'));
+      .catch(() => history.push('/'));
   }
 
   render() {
@@ -43,12 +48,12 @@ class UserAppointment extends React.Component {
       appointment => appointment.user_id === userStatus.id,
     );
 
-    const filterProviders = a_id =>
-      providers.filter(provider => provider.id === a_id).map(p => p.name);
+    const filterProviders = apptId =>
+      providers.filter(provider => provider.id === apptId).map(p => p.name);
 
-    const showUserAppointments = filterWithUserId.map((appointment, index) => (
+    const showUserAppointments = filterWithUserId.map(appointment => (
       <AppointmentCard
-        key={index}
+        key={appointment.id}
         pName={filterProviders(appointment.provider_id)}
         appTime={appointment.time}
         appLocation={appointment.city}
@@ -56,7 +61,7 @@ class UserAppointment extends React.Component {
       />
     ));
 
-    const showAdminAppointments = appointments.map((appointment, index) => (
+    const showAdminAppointments = appointments.map(appointment => (
       <AppointmentCard
         key={appointment.id}
         pName={filterProviders(appointment.provider_id)}
@@ -78,10 +83,7 @@ class UserAppointment extends React.Component {
     return (
       <>
         <div>
-          <DisplayAllTitles
-            main="YOUR APPOINTMENTS"
-            sub="All your appointments in one place."
-          />
+          <DisplayAllTitles main="YOUR APPOINTMENTS" sub="All your appointments in one place." />
           <div className="grid-for-appointments-list">
             {filterWithUserId.length > 0 && userStatus.admin === false
               ? showUserAppointments
@@ -96,5 +98,14 @@ class UserAppointment extends React.Component {
     );
   }
 }
+UserAppointment.propTypes = {
+  history: PropTypes.object,
+  userStatus: PropTypes.object,
+};
+
+UserAppointment.defaultProps = {
+  history: {},
+  userStatus: {},
+};
 
 export default UserAppointment;

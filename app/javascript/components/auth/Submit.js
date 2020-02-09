@@ -1,15 +1,10 @@
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import '../styles/Submit.css';
 
-const Submit = ({
-  buttonType,
-  buttonText,
-  linkOne,
-  linkOneText,
-  linkTwo,
-  linkTwoText,
-}) => {
+const Submit = ({ buttonType, buttonText, linkOne, linkOneText, linkTwo, linkTwoText }) => {
   return (
     <div>
       <div className="login-btn">
@@ -24,6 +19,24 @@ const Submit = ({
       </div>
     </div>
   );
+};
+
+Submit.propTypes = {
+  buttonType: PropTypes.string,
+  buttonText: PropTypes.string,
+  linkOne: PropTypes.string,
+  linkOneText: PropTypes.string,
+  linkTwo: PropTypes.string,
+  linkTwoText: PropTypes.string,
+};
+
+Submit.defaultProps = {
+  buttonType: '',
+  buttonText: '',
+  linkOneText: '',
+  linkOne: '',
+  linkTwo: '',
+  linkTwoText: '',
 };
 
 export default Submit;

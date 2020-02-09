@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import statesInNigeria from './statesInNigeria';
 import '../styles/NewAppointment.css';
-import { PassThrough } from 'stream';
 
 class NewAppointment extends React.Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class NewAppointment extends React.Component {
       city: '',
       date: null,
       time: null,
-      user_id: null,
+      user_id: 1,
       provider: { name: '' },
       errors: '',
     };
@@ -20,18 +22,13 @@ class NewAppointment extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
   componentDidMount() {
     const {
       match: {
         params: { id },
       },
+      history,
     } = this.props;
-    this.setState({ user_id: 1 });
-
     const url = `/api/v1/providers/${id}`;
 
     fetch(url)
@@ -42,7 +39,13 @@ class NewAppointment extends React.Component {
         throw new Error('Network response was not ok.');
       })
       .then(response => this.setState({ provider: response }))
-      .catch(() => this.props.history.push('/provider'));
+      .catch(() => history.push('/provider'));
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
 
   onSubmit(event) {
@@ -50,6 +53,7 @@ class NewAppointment extends React.Component {
       match: {
         params: { id },
       },
+      history,
     } = this.props;
 
     event.preventDefault();
@@ -57,12 +61,8 @@ class NewAppointment extends React.Component {
     const { city, date, time, user_id } = this.state;
     const { userStatus } = this.props;
     this.setState({ [user_id]: userStatus.id });
-    if (city.length > 0 || date < Date.now || time.length > 0) {
-      this.setState({ errors: "You can't use a date in the past" });
-      return;
-    } else if (city.length === 0 || date.length === 0 || time.length === 0) {
-      return;
-    }
+
+    //  Add condition for time in the past
 
     const body = {
       city,
@@ -82,18 +82,19 @@ class NewAppointment extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-          this.props.history.push(`/appointments/${user_id}`);
+          history.push(`/appointments/${user_id}`);
           return response.json();
         }
         throw new Error('Network response was not ok.');
       })
-      .then(this.setState({ errors: 'Something went wrong. ' }))
-      .catch(error => console.log(error.message));
+      .then(this.setState({ errors: 'City cannot be blank ' }))
+      .catch(error => error.message);
   }
+
   render() {
     const { provider, errors } = this.state;
     const displayStatesInNigeria = () =>
-      statesInNigeria.map((state, k) => <option key={k}>{state}</option>);
+      statesInNigeria.map(state => <option key={state}>{state}</option>);
     const displayErrors = () => <div className="login-errors">{errors}</div>;
 
     return (
@@ -101,19 +102,11 @@ class NewAppointment extends React.Component {
         <div className="make-appointment-container">
           <div className="make-appointment-wrapper">
             {errors.length > 0 ? displayErrors() : ''}
-            <h1 className="make-appointment-title">
-              Make an appointment with {provider.name}
-            </h1>
+            <h1 className="make-appointment-title">Make an appointment with {provider.name}</h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="city">City:</label>
-                <select
-                  name="city"
-                  id="city"
-                  required
-                  onChange={this.onChange}
-                  placeholder="Lagos"
-                >
+                <select name="city" id="city" required onChange={this.onChange} placeholder="Lagos">
                   {displayStatesInNigeria()}
                 </select>
               </div>
@@ -158,4 +151,15 @@ class NewAppointment extends React.Component {
   }
 }
 
+NewAppointment.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object,
+  userStatus: PropTypes.object,
+};
+
+NewAppointment.defaultProps = {
+  history: {},
+  match: {},
+  userStatus: {},
+};
 export default NewAppointment;

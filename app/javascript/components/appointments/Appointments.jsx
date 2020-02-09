@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class Appointments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       appointment: { city: '', Date: '', Time: '' },
-      user: {},
     };
     this.deleteAppointment = this.deleteAppointment.bind(this);
   }
@@ -17,6 +16,7 @@ class Appointments extends React.Component {
       match: {
         params: { id },
       },
+      history,
     } = this.props;
 
     const url = `/api/v1/providers/${id}/appointments`;
@@ -29,7 +29,7 @@ class Appointments extends React.Component {
         throw new Error('Network response was not ok.');
       })
       .then(response => this.setState({ appointment: response }))
-      .catch(() => this.props.history.push('/user_appointments'));
+      .catch(() => history.push('/user_appointments'));
   }
 
   deleteAppointment() {
@@ -37,6 +37,7 @@ class Appointments extends React.Component {
       match: {
         params: { id },
       },
+      history,
     } = this.props;
     const url = `/api/v1/providers/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -54,8 +55,8 @@ class Appointments extends React.Component {
         }
         throw new Error('Network response was not ok.');
       })
-      .then(() => this.props.history.push('/providers'))
-      .catch(error => console.log(error.message));
+      .then(() => history.push('/providers'))
+      .catch(error => error.message);
   }
 
   render() {
@@ -75,11 +76,7 @@ class Appointments extends React.Component {
             </div>
 
             <div className="col-sm-12 col-lg-2">
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={this.deleteProvider}
-              >
+              <button type="button" className="btn btn-danger" onClick={this.deleteProvider}>
                 Delete Provider
               </button>
             </div>
@@ -94,4 +91,13 @@ class Appointments extends React.Component {
   }
 }
 
+Appointments.propTypes = {
+  history: PropTypes.string,
+  match: PropTypes.number,
+};
+
+Appointments.defaultProps = {
+  history: '',
+  match: 1,
+};
 export default Appointments;

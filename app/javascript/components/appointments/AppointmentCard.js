@@ -1,6 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import '../styles/AppointmentCard.css';
 import dateFormat from 'dateformat';
+import PropTypes from 'prop-types';
 
 const AppointmentCard = ({ pName, appDate, appTime, appLocation }) => (
   <div>
@@ -22,4 +24,17 @@ const AppointmentCard = ({ pName, appDate, appTime, appLocation }) => (
   </div>
 );
 
+AppointmentCard.propTypes = {
+  pName: PropTypes.array,
+  appDate: PropTypes.string,
+  appTime: PropTypes.string,
+  appLocation: PropTypes.string,
+};
+
+AppointmentCard.defaultProps = {
+  pName: [],
+  appDate: '',
+  appTime: '',
+  appLocation: '',
+};
 export default AppointmentCard;

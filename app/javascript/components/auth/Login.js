@@ -1,7 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import '../styles/Login.css';
+import PropTypes from 'prop-types';
 import Field from './Field';
 import Submit from './Submit';
 
@@ -17,13 +18,15 @@ export class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
   }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSuccessfulAuth(data) {
-    this.props.handleLogin(data);
-    this.props.history.push('/providers');
+    const { handleLogin, history } = this.props;
+    handleLogin(data);
+    history.push('/providers');
   }
 
   handleSubmit(e) {
@@ -34,8 +37,8 @@ export class Login extends Component {
       .post(
         '/api/v1/sessions',
         {
-          email: email,
-          password: password,
+          email,
+          password,
         },
         {
           withCredentials: true,
@@ -46,14 +49,13 @@ export class Login extends Component {
           this.handleSuccessfulAuth(response.data);
         }
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({
-          LoginErrors:
-            'The username or password you have entered is incorrect.',
+          LoginErrors: 'The username or password you have entered is incorrect.',
         });
-        console.log('login error', error);
       });
   }
+
   render() {
     const { email, password, LoginErrors } = this.state;
 
@@ -82,7 +84,7 @@ export class Login extends Component {
             />
             <div className="remember-me">
               <input type="checkbox" />
-              <label>Remember me</label>
+              <label htmlFor="remember-me">Remember me</label>
             </div>
             <Submit
               buttonType="submit"
@@ -98,5 +100,17 @@ export class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  handleLogin: PropTypes.func,
+  history: PropTypes.object,
+  push: PropTypes.string,
+};
+
+Login.defaultProps = {
+  push: '',
+  history: {},
+  handleLogin: () => {},
+};
 
 export default Login;

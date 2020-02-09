@@ -1,5 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class EditProvider extends React.Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class EditProvider extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   componentDidMount() {
     const {
       match: {
@@ -24,7 +27,7 @@ class EditProvider extends React.Component {
     } = this.props;
 
     const url = `/api/v1/providers/${id}`;
-
+    const { history } = this.props;
     fetch(url)
       .then(response => {
         if (response.ok) {
@@ -33,7 +36,7 @@ class EditProvider extends React.Component {
         throw new Error('Network response was not ok.');
       })
       .then(response => this.setState({ provider: response }))
-      .catch(() => this.props.history.push('/provider'));
+      .catch(() => history.push('/provider'));
   }
 
   onChange(event) {
@@ -45,6 +48,7 @@ class EditProvider extends React.Component {
       match: {
         params: { id },
       },
+      history,
     } = this.props;
     event.preventDefault();
     const url = `/api/v1/providers/${id}`;
@@ -73,18 +77,17 @@ class EditProvider extends React.Component {
         }
         throw new Error('Network response was not ok.');
       })
-      .then(response => this.props.history.push(`/provider/${response.id}`))
-      .catch(error => console.log(error.message));
+      .then(response => history.push(`/provider/${response.id}`))
+      .catch(error => error.message);
   }
+
   render() {
     const { provider } = this.state;
     return (
       <div className="container mt-5">
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
-            <h1 className="font-weight-normal mb-5">
-              Update information for {provider.name}
-            </h1>
+            <h1 className="font-weight-normal mb-5">Update information for {provider.name}</h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="recipeName">Provider name: </label>
@@ -159,5 +162,16 @@ class EditProvider extends React.Component {
     );
   }
 }
+EditProvider.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object,
+  push: PropTypes.string,
+};
+
+EditProvider.defaultProps = {
+  push: '',
+  history: {},
+  match: {},
+};
 
 export default EditProvider;

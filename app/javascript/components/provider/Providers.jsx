@@ -1,7 +1,10 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import '../styles/Providers.css';
+import PropTypes from 'prop-types';
+import { uuid } from 'uuidv4';
 import ProvidersComponent from './ProvidersComponent';
 import DisplayAllTitles from '../auth/DisplayAllTtitles';
 
@@ -15,6 +18,7 @@ class Providers extends React.Component {
 
   componentDidMount() {
     const url = '/api/v1/providers/';
+    const { history } = this.props;
     fetch(url)
       .then(response => {
         if (response.ok) {
@@ -23,15 +27,15 @@ class Providers extends React.Component {
         throw new Error('Network response was not ok.');
       })
       .then(response => this.setState({ providers: response }))
-      .catch(() => this.props.history.push('/'));
+      .catch(() => history.push('/'));
   }
 
   render() {
     const { providers } = this.state;
-    const { userStatus, loggedInStatus } = this.props;
+    const { loggedInStatus } = this.props;
 
-    const allProviders = providers.map((provider, index) => (
-      <div key={index}>
+    const allProviders = providers.map(provider => (
+      <div key={uuid()}>
         <ProvidersComponent
           imageURL={provider.logo}
           name={provider.name}
@@ -53,10 +57,7 @@ class Providers extends React.Component {
       <>
         {loggedInStatus === 'LOGGED_in' ? (
           <div>
-            <DisplayAllTitles
-              main="OUR PARTNERS"
-              sub="Select a provider to book an appointment."
-            />
+            <DisplayAllTitles main="OUR PARTNERS" sub="Select a provider to book an appointment." />
             <div className="grid-for-providers-list">
               {providers.length > 0 ? allProviders : noProvider}
             </div>
@@ -69,4 +70,15 @@ class Providers extends React.Component {
   }
 }
 
+Providers.propTypes = {
+  loggedInStatus: PropTypes.string,
+  history: PropTypes.object,
+  push: PropTypes.string,
+};
+
+Providers.defaultProps = {
+  push: '',
+  loggedInStatus: '',
+  history: {},
+};
 export default Providers;

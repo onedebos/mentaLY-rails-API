@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import Field from './Field';
-import Submit from '../auth/Submit';
+import Submit from './Submit';
 import '../styles/Registration.css';
 
 export class Registration extends Component {
@@ -19,13 +21,15 @@ export class Registration extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
   }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSuccessfulAuth(data) {
-    this.props.handleLogin(data);
-    this.props.history.push('/providers');
+    const { handleLogin, history } = this.props;
+    handleLogin(data);
+    history.push('/providers');
   }
 
   handleSubmit(e) {
@@ -35,10 +39,10 @@ export class Registration extends Component {
       .post(
         'http://localhost:3000/api/v1/registrations',
         {
-          name: name,
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation,
+          name,
+          email,
+          password,
+          password_confirmation,
         },
         {
           withCredentials: true,
@@ -46,41 +50,22 @@ export class Registration extends Component {
       )
       .then(response => {
         if (response.data.status === 'created') {
-          //pushes data into a hsa prop in Apps for other
-          //components to access
-          // this.props.handleSuccessfulAuth(response.data);
           this.handleSuccessfulAuth(response.data);
         }
       })
-      .catch(error => {
-        console.log('reg error', error);
+      .catch(() => {
         this.setState({ registrationErrors: "You're already registered." });
       });
   }
-  render() {
-    const {
-      name,
-      email,
-      password,
-      password_confirmation,
-      registrationErrors,
-    } = this.state;
 
-    const dispslayErrorMessage = () => (
-      <div>
-        <h4>
-          You're already registered. Were you trying to&nbsp;
-          <Link to="/login">Login</Link> instead?.
-        </h4>
-      </div>
-    );
+  render() {
+    const { name, email, password, password_confirmation, registrationErrors } = this.state;
+
     return (
       <div className="login-bg">
         <div className="sign-up-wrapper">
           <h3 className="login-logo">MentaLLy</h3>
-          <p className="login-errors">
-            {registrationErrors.length > 0 ? registrationErrors : ''}
-          </p>
+          <p className="login-errors">{registrationErrors.length > 0 ? registrationErrors : ''}</p>
           <h3 className="login-title">Sign up</h3>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <Field
@@ -129,5 +114,16 @@ export class Registration extends Component {
     );
   }
 }
+Registration.propTypes = {
+  handleLogin: PropTypes.func,
+  history: PropTypes.object,
+  push: PropTypes.string,
+};
+
+Registration.defaultProps = {
+  push: '',
+  history: {},
+  handleLogin: () => {},
+};
 
 export default Registration;

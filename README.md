@@ -21,7 +21,7 @@ by React Views.
 
 ## Live Demo
 
-[Live Demo Link](https://mentally.herokuapp.com)
+[Live Demo Link](https://mentallly.herokuapp.com)
 
 ## Getting Started
 

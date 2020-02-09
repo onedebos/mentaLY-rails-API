@@ -1,5 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import './styles/Menu.css';
 
@@ -10,18 +13,18 @@ export default class Menu extends Component {
   }
 
   handleLogOutClick() {
+    const { handleLogout } = this.props;
     axios
       .delete('/api/v1/logout', {
         withCredentials: true,
       })
-      .then(response => {
-        this.props.handleLogout();
+      .then(() => {
+        handleLogout();
       })
-      .catch(error => {
-        console.log('logout error', error);
-      });
-    this.props.handleLogout();
+      .catch(error => error);
+    handleLogout();
   }
+
   render() {
     const { loggedInStatus, userStatus } = this.props;
     const navigation = user => (
@@ -30,28 +33,23 @@ export default class Menu extends Component {
           <p className="user-name">@{user.name}</p>
         </div>
         <div className="menu-items">
-          <Link to="/" className={`menu-item`} href="#">
+          <Link to="/" className="menu-item">
             Home
           </Link>
-          <Link to="/providers" className={`menu-item`}>
+          <Link to="/providers" className="menu-item">
             Partners
           </Link>
-          <Link to={`/appointments/${user.id}`} className={`menu-item`}>
+          <Link to={`/appointments/${user.id}`} className="menu-item">
             Appointments
           </Link>
           {userStatus.admin === true ? (
-            <Link to={`/provider`} className="menu-item">
+            <Link to="/provider" className="menu-item">
               NEW PARTNER
             </Link>
           ) : (
             ''
           )}
-          <Link
-            to="/"
-            onClick={() => this.handleLogOutClick()}
-            className="menu-item"
-            href="#"
-          >
+          <Link to="/" onClick={() => this.handleLogOutClick()} className="menu-item" href="#">
             Logout
           </Link>
         </div>
@@ -64,10 +62,22 @@ export default class Menu extends Component {
         <img
           className="user-avatar"
           src="https://api.adorable.io/avatars/100/abott@adorable.png"
+          alt="user-avatar"
         />
 
-        {loggedInStatus === 'LOGGED_in' ? navigation(userStatus) : <div></div>}
+        {loggedInStatus === 'LOGGED_in' ? navigation(userStatus) : ''}
       </nav>
     );
   }
 }
+Menu.propTypes = {
+  handleLogout: PropTypes.func,
+  userStatus: PropTypes.object,
+  loggedInStatus: PropTypes.string,
+};
+
+Menu.defaultProps = {
+  handleLogout: () => {},
+  loggedInStatus: {},
+  userStatus: {},
+};
