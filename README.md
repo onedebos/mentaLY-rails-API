@@ -1,6 +1,6 @@
-# Project Name
+# MentaLLy
 
-> This is the API that serves a tablet(intended to be viewed on tablets) web app that > allows people schedule
+> This is the API that serves a tablet(intended to be viewed on tablets) web app that allows people schedule
 > appointments with mental health service providers in Nigeria.
 
 ![screenshot](./app_screenshot.png)
@@ -23,6 +23,10 @@ by React Views.
 
 [Live Demo Link](https://mentallly.herokuapp.com)
 
+## Front-end Repo
+
+[Front end git repo](https://github.com/onedebos/mentaLLy-frontend)
+
 ## Getting Started
 
 **To get started, follow the instructions below**
@@ -41,35 +45,13 @@ Install the Ruby Gems required by rails
 bundle install
 ```
 
-Install the packages required by React
-
-```
-npm install or yarn install
-```
-
 ### Usage
 
-To use the app, start the rails server using
+To serve up the endpoints from the API, start the rails server using
 
 ```
-rails s
+rails s -p 3001
 ```
-
-In a seperate terminal window, start Webpack using
-
-```
-npm start
-```
-
-navigate to
-
-```
-http://localhost:3000
-```
-
-in your browser. You should see the app running!
-
-You can sign up and sign in from here.
 
 To access the Admin account/panel, use the following information.
 
