@@ -1,5 +1,5 @@
 {
-  "name": "mentaLLy-api",
+  "name": "mentally-api",
   "private": false,
   "proxy": "http://localhost:3000",
   "dependencies": {
