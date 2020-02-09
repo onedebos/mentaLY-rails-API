@@ -1,6 +1,6 @@
 {
-  "name": "mentalee",
-  "private": true,
+  "name": "mentaLLy-api",
+  "private": false,
   "proxy": "http://localhost:3000",
   "dependencies": {
     "@babel/preset-react": "^7.8.3",
@@ -34,7 +34,7 @@
   "scripts": {
     "start": "./bin/webpack-dev-server"
   },
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -52,5 +52,10 @@
     "yarn": "1.19.1",
     "npm": "6.13.6",
     "node": "11.14.0"
-  }
+  },
+  "description": "API package for Mentally. An app that helps people schedule appointments for mental health services in Nigeria.",
+  "main": "index.js",
+  "repository": "https://github.com/onedebos/mentaLY-rails-API",
+  "author": "Adebola <onedebos@gmail.com>",
+  "license": "MIT"
 }
