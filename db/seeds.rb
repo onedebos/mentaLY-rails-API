@@ -56,7 +56,7 @@ Provider.create!(
 )
 
 
-User.create(
+User.create!(
     id:2,
     name: 'Admin Panel',
     email: 'admin@mentallybook.com',
