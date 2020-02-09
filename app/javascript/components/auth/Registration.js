@@ -37,7 +37,7 @@ export class Registration extends Component {
     e.preventDefault();
     axios
       .post(
-        'http://localhost:3000/api/v1/registrations',
+        '/api/v1/registrations',
         {
           name,
           email,
