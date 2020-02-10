@@ -81,6 +81,14 @@ Appointment.create(
 )
 
 Appointment.create(
+    city: 'Abuja',
+    user_id:2,
+    provider_id:5,
+    date: '20/02/2020',
+    time:'22:50'
+)
+
+Appointment.create(
     city: 'Lagos',
     user_id:2,
     provider_id:1,
