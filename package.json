@@ -1,59 +1,19 @@
 {
-  "name": "mentalee",
+  "name": "mentally-api",
   "private": true,
-  "proxy": "http://localhost:3000",
   "dependencies": {
-    "@babel/preset-react": "^7.8.3",
-    "@fortawesome/fontawesome-svg-core": "^1.2.27",
-    "@fortawesome/free-solid-svg-icons": "^5.12.1",
-    "@fortawesome/react-fontawesome": "^0.1.8",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "rails/webpacker",
-    "axios": "^0.19.2",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "bootstrap": "^4.4.1",
-    "circular-std": "^1.0.3",
-    "dateformat": "^3.0.3",
-    "flatpickr": "^4.6.3",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
-    "popper.js": "^1.16.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-redux": "^7.1.3",
-    "react-router-dom": "^5.1.2",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0",
+    "@rails/webpacker": "4.2.2",
     "turbolinks": "^5.2.0",
-    "uuidv4": "^6.0.2"
+    "@babel/preset-react": "^7.8.3"
   },
-  "scripts": {
-    "start": "./bin/webpack-dev-server",
-    "build": "cd client && yarn install && yarn build && cd ..",
-    "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
-  },
+  "repository": "https://github.com/onedebos/mentaLY-rails-API",
   "version": "0.1.0",
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1",
-    "react-proptypes-generate": "^1.3.0",
-    "webpack-dev-server": "^3.10.2"
-  },
-  "engines": {
-    "yarn": "1.19.1",
-    "npm": "6.13.6",
-    "node": "11.14.0"
+    "webpack-dev-server": "^3.9.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
   }
 }

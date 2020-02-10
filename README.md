@@ -60,6 +60,8 @@ To access the Admin account/panel, use the following information.
 
 - Admin can create a new provider.
 
+- Api endpoint [here](https://mentallly-api.com/api/v1/providers)
+
 ### Run tests
 
 Run model tests
@@ -71,8 +73,6 @@ bundle exec rspec
 ### Deployment
 
 ## Authors
-
-👤 **Adebola**
 
 👤 **Adebola**
 
@@ -95,6 +95,7 @@ Give a ⭐️ if you like this project!
 - Thanks to [Murat Kohmaz](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) for his design.
 - Thanks to [Jessica Felicio](https://unsplash.com/photos/QS9ZX5UnS14) for images
 - logos used from [hatchful](https://www.bookmarks.design/media/image/hatchful.jpg)
+- Wikimedia for the [O Logo](https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png)
 
 ## 📝 License
 
