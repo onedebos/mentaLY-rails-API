@@ -16,12 +16,6 @@ class Api::V1::AppointmentsController < ApplicationController
     end
   end
 
-  def destroy
-    @appointment = @provider.appointments.find(params[:id])
-    @appointment.destroy
-    render json: { message: 'Appointment deleted' }
-  end
-
   def logged_in
     if @current_user
       render json: {
