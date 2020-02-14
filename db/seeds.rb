@@ -106,7 +106,7 @@ Appointment.create(
     time:'22:50'
 )
 
-Appointment.create(
+
 Appointment.create!(
     city: 'Lagos',
     user_id:2,
