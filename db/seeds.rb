@@ -65,6 +65,15 @@ User.create!(
 
 )
 
+User.create!(
+    id:1,
+    name: 'user',
+    email: 'user@mentallybook.com',
+    password: 'password',
+    admin: true
+
+)
+
 Appointment.create!(
     city: 'Lagos',
     user_id:2,
