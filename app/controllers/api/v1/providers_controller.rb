@@ -1,6 +1,4 @@
 class Api::V1::ProvidersController < ApplicationController
-  # before_action :set_provider, only: %i[show edit update destroy]
-  # before_action :authenticate_user!
   include CurrentUserConcern
 
   def index
