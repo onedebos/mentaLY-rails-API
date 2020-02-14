@@ -33,6 +33,57 @@ by React Views.
 
 To get a local copy up and running follow these simple example steps.
 
+- git clone the frontend repo
+
+```
+git clone https://github.com/onedebos/mentaLLy-frontend.git
+```
+
+- git clone the backend repo if you want to run the server on your local machine. Otherwise, skip the next 3 steps.
+
+```
+git clone https://github.com/onedebos/mentaLY-rails-API.git
+```
+
+- cd into the backend repo and install the gems
+
+```
+bundle install
+```
+
+- run the rails server on port 3001
+
+```
+rails s -p 3001
+```
+
+- If you decide to run the server locally, cd into the frontend repo. Navigate to src/components/helper/apiUrl.js and change the API_URL string to
+
+```
+http://localhost:3001
+```
+
+- run
+
+```
+npm install
+```
+
+to install all packages. then
+
+```
+npm start
+```
+
+- to start the app in the browser.
+
+- To access the Admin account/panel, use the following information.
+
+- email: admin@mentallybook.com
+- password: password
+
+- Admin can create a new provider.
+
 ### Prerequisites
 
 - Make sure to have Rails 6.0 and Ruby 2.5.1
