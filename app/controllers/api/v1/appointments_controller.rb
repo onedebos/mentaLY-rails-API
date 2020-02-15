@@ -8,7 +8,7 @@ class Api::V1::AppointmentsController < ApplicationController
 
   def create
     @provider = Provider.find(params[:provider_id])
-    @appointment = @provider.appointments.create!(appointment_params)
+    @appointment = @provider.appointments.create(appointment_params)
     if @appointment.save
       render json: @appointment
     else
@@ -32,7 +32,7 @@ class Api::V1::AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:date, :time, :city, :user_id)
+    params.permit(:date, :time, :city, :user_id)
   end
 
   def set_provider

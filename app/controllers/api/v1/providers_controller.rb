@@ -7,7 +7,7 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def create
-    provider = Provider.create!(provider_params)
+    provider = Provider.create(provider_params)
     if provider
       render json: provider
     else

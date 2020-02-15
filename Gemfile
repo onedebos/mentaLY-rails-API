@@ -17,9 +17,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-cors', require: 'rack/cors'
+gem 'rspec-rails', '~> 3.5'
 gem 'sassc-rails', '~> 1.3'
 gem 'turbolinks', '~> 2.5', '>= 2.5.3'
-gem 'rspec-rails', '~> 3.5'
 gem 'webpacker'
 
 # Reduces boot times through caching; required in config/boot.rb
