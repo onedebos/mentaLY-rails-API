@@ -23,16 +23,6 @@ class Api::V1::ProvidersController < ApplicationController
     end
   end
 
-  def update
-    provider = Provider.find(params[:id])
-    provider.update!(provider_params)
-    render json: provider
-  end
-
-  def edit
-    @provider = Provider.find(params[:id])
-  end
-
   def destroy
     provider&.destroy
     render json: { message: 'Provider deleted' }
