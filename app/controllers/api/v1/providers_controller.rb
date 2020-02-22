@@ -1,6 +1,4 @@
 class Api::V1::ProvidersController < ApplicationController
-  # before_action :set_provider, only: %i[show edit update destroy]
-  # before_action :authenticate_user!
   include CurrentUserConcern
 
   def index
@@ -9,7 +7,7 @@ class Api::V1::ProvidersController < ApplicationController
   end
 
   def create
-    provider = Provider.create!(provider_params)
+    provider = Provider.create(provider_params)
     if provider
       render json: provider
     else
@@ -23,16 +21,6 @@ class Api::V1::ProvidersController < ApplicationController
     else
       render json: provider.errors
     end
-  end
-
-  def update
-    provider = Provider.find(params[:id])
-    provider.update!(provider_params)
-    render json: provider
-  end
-
-  def edit
-    @provider = Provider.find(params[:id])
   end
 
   def destroy

@@ -8,18 +8,12 @@ class Api::V1::AppointmentsController < ApplicationController
 
   def create
     @provider = Provider.find(params[:provider_id])
-    @appointment = @provider.appointments.create!(appointment_params)
+    @appointment = @provider.appointments.create(appointment_params)
     if @appointment.save
       render json: @appointment
     else
       render json: @appointment.errors
     end
-  end
-
-  def destroy
-    @appointment = @provider.appointments.find(params[:id])
-    @appointment.destroy
-    render json: { message: 'Appointment deleted' }
   end
 
   def logged_in
@@ -38,7 +32,7 @@ class Api::V1::AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:date, :time, :city, :user_id)
+    params.permit(:date, :time, :city, :user_id)
   end
 
   def set_provider

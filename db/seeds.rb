@@ -1,9 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+
 
 
 
@@ -57,8 +52,8 @@ Provider.create!(
 
 
 User.create!(
-    id:2,
-    name: 'Admin Panel',
+    id:1,
+    name: 'user',
     email: 'admin@mentallybook.com',
     password: 'password',
     admin: true
@@ -67,7 +62,7 @@ User.create!(
 
 Appointment.create!(
     city: 'Lagos',
-    user_id:2,
+    user_id:1,
     provider_id:1,
     date: '20/02/2020',
     time:'22:50'
@@ -75,7 +70,7 @@ Appointment.create!(
 
 Appointment.create!(
     city: 'Lagos',
-    user_id:2,
+    user_id:1,
     provider_id:1,
     date: '20/02/2020',
     time:'22:50'
@@ -83,15 +78,24 @@ Appointment.create!(
 
 Appointment.create!(
     city: 'Lagos',
-    user_id:2,
+    user_id:1,
     provider_id:1,
     date: '20/02/2020',
     time:'22:50'
 )
 
+Appointment.create(
+    city: 'Abuja',
+    user_id:1,
+    provider_id:5,
+    date: '20/02/2020',
+    time:'22:50'
+)
+
+
 Appointment.create!(
     city: 'Lagos',
-    user_id:2,
+    user_id:1,
     provider_id:1,
     date: '20/02/2020',
     time:'22:50'
