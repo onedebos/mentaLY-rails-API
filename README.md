@@ -111,7 +111,7 @@ To access the Admin account/panel, use the following information.
 
 - Admin can create a new provider.
 
-- Api endpoint [here](https://mentallly-api.com/api/v1/providers)
+- Api endpoint [here](https://mentallly-api.herokuapp.com/api/v1/providers)
 
 ### Run tests
 
