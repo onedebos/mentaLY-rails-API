@@ -121,8 +121,6 @@ Run model tests
 bundle exec rspec
 ```
 
-### Deployment
-
 ## Authors
 
 👤 **Adebola**
@@ -130,6 +128,7 @@ bundle exec rspec
 - Github: [@githubhandle](https://github.com/onedebos)
 - Twitter: [@twitterhandle](https://twitter.com/debosthefirst)
 - Linkedin: [linkedin](https://www.linkedin.com/in/adebola-niran/)
+- Portfolio: [Website](https://elegant-borg-4081b7.netlify.com/#)
 
 ## 🤝 Contributing
 
