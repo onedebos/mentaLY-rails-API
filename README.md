@@ -121,6 +121,9 @@ Run model tests
 bundle exec rspec
 ```
 
+## Planned Features
+- Implementing a search endpoint to search for a provider.
+
 ## Authors
 
 👤 **Adebola**
