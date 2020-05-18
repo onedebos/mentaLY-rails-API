@@ -1,7 +1,7 @@
 # MentaLLy
 
-> This is the API that serves a tablet(intended to be viewed on tablets) web app that allows people schedule
-> appointments with mental health service providers in Nigeria.
+This is the API that serves a tablet(intended to be viewed on tablets) web app that allows people schedule
+appointments with mental health service providers in Nigeria.
 
 ![screenshot](./app_screenshot.png)
 
@@ -111,7 +111,7 @@ To access the Admin account/panel, use the following information.
 
 - Admin can create a new provider.
 
-- Api endpoint [here](https://mentallly-api.com/api/v1/providers)
+- Api endpoint [here](https://mentallly-api.herokuapp.com/api/v1/providers)
 
 ### Run tests
 
@@ -121,7 +121,8 @@ Run model tests
 bundle exec rspec
 ```
 
-### Deployment
+## Planned Features
+- Implementing a search endpoint to search for a provider.
 
 ## Authors
 
@@ -130,6 +131,7 @@ bundle exec rspec
 - Github: [@githubhandle](https://github.com/onedebos)
 - Twitter: [@twitterhandle](https://twitter.com/debosthefirst)
 - Linkedin: [linkedin](https://www.linkedin.com/in/adebola-niran/)
+- Portfolio: [Website](https://elegant-borg-4081b7.netlify.com/#)
 
 ## 🤝 Contributing
 
